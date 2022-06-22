@@ -1,5 +1,7 @@
 <template>
-  <!-- <router-link
+
+
+<!-- <router-link
     :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
     class="recipe-preview"
   >
@@ -16,7 +18,12 @@
       </ul>
     </div>
   </router-link> -->
+
 <div>
+  <router-link
+    :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
+    class="recipe-preview"
+  >
   <b-card
     :title="recipe.title"
     :img-src="recipe.image"
@@ -29,9 +36,8 @@
     <b-card-text>
       A great recipe! the duration is {{ recipe.readyInMinutes }} minutes and the {{ recipe.aggregateLikes }} likes
     </b-card-text>
-
-    <b-button href="#" variant="primary">Go somewhere</b-button>
   </b-card>
+  </router-link>
 </div>
   
 </template>

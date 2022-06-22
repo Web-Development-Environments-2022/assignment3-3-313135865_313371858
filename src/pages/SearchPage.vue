@@ -26,9 +26,9 @@
           </div>
           <br>
           <b-button href='#' variant="primary" @click="searchClick"> Search</b-button>
-          <div v-if="searched">
+          <div v-if="trigger > 0">
           <br>
-          <RecipePreviewList title="Search results" previewType="Search" :searchQuery="searchText" />
+          <RecipePreviewList title="Search results" :trigger="trigger" :searchQuery="searchText" />
           </div>
         </div>
       </div>
@@ -46,7 +46,7 @@ export default {
   computed: {},
   data() {
     return {
-      searched: false,
+      trigger: 0,
       searchText: "",
     };
   },
@@ -56,8 +56,9 @@ export default {
       this.$emit("search", this.searchText);
     },
     searchClick(){
+      this.trigger += 1
       console.log(this.searchText)
-      this.searched = true
+      
     }
   },
 };

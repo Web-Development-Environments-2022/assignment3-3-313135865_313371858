@@ -4,11 +4,15 @@
       {{ title }}:
       <slot></slot>
     </h3>
+    <div v-if="no_results">
+    No Results!</div>
+    <div v-else> 
     <b-row>
       <b-col v-for="r in recipes" :key="r.id">
         <RecipePreview class="recipePreview" :recipe="r" />
       </b-col>
     </b-row>
+    </div>
   </b-container>
 </template>
 
@@ -24,63 +28,70 @@ export default {
       type: String,
       required: true
     },
-    previewType:{
-      type:String,
-      required: false
+    trigger:{
+      type: Number
     },
     searchQuery:{
       type:String,
       required: false
     }
   },
+  watch: { 
+      	trigger: function() {
+          console.log("changed")
+          if (this.trigger > 1){
+              console.log("Update recipes()")
+              this.updateRecipes()
+          } // watch it
+          
+        }
+      },
   data() {
     return {
-      recipes: []
+      recipes: [],
+      no_results : false
     };
   },
   mounted() {
     this.updateRecipes();
-    console.log("test monuted")
   },
   methods: {
     async updateRecipes() {
       try {
+
         let response;
         let recipes;
-        if (!this.previewType){
+        if (!this.searchQuery){ // Random recipes.
         console.log( "http://localhost:3000" + "/recipes/random")
         response = await this.axios.get("http://localhost:3000" + "/recipes/random",
            //this.$root.store.server_domain
         );
+
         recipes = response.data.recipes}
-        else{
+        else{ // Search for recipes.
+          
         console.log( "http://localhost:3000" + "/recipes/search?searchQuery="+this.searchQuery+"&amount=5")
         response = await this.axios.get("http://localhost:3000" + "/recipes/search?searchQuery="+this.searchQuery+"&amount=5"
         );
-        recipes = response.data.results;
+        recipes = response.data;
         }
-        console.log(response);
-        this.recipes = [];
-        this.recipes.push(...recipes);
-        console.log(this.recipes);
+
+        if (recipes == "No results!"){ // When there are no results.
+          this.no_results = true
+        }
+
+        else{
+          console.log(response);
+          this.recipes = [];
+          this.recipes.push(...recipes);
+          console.log(this.recipes);
+        }
+        
+     
       } catch (error) {
         console.log(error);
        }
-      // try {
-      //   console.log( "http://localhost:3000" + "/recipes/random")
-      //   const response = await this.axios.get(
-      //      "http://localhost:3000" + "/recipes/random",
-      //      //this.$root.store.server_domain
-      //   );
-      //   console.log(response);
-      //   const recipes = response.data.recipes;
-      //   this.recipes = [];
-      //   this.recipes.push(...recipes);
-      //   console.log(this.recipes);
-      // } catch (error) {
-      //   console.log(error);
-      // }
-      
+    
     }
   }
 };
