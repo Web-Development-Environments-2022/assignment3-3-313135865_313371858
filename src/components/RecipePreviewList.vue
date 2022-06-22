@@ -23,6 +23,14 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    previewType:{
+      type:String,
+      required: false
+    },
+    searchQuery:{
+      type:String,
+      required: false
     }
   },
   data() {
@@ -37,21 +45,42 @@ export default {
   methods: {
     async updateRecipes() {
       try {
+        let response;
+        let recipes;
+        if (!this.previewType){
         console.log( "http://localhost:3000" + "/recipes/random")
-        const response = await this.axios.get(
-           "http://localhost:3000" + "/recipes/random",
-          // "https://test-for-3-2.herokuapp.com/recipes/random"
+        response = await this.axios.get("http://localhost:3000" + "/recipes/random",
            //this.$root.store.server_domain
         );
-
-        // console.log(response);
-        const recipes = response.data.recipes;
+        recipes = response.data.recipes}
+        else{
+        console.log( "http://localhost:3000" + "/recipes/search?searchQuery="+this.searchQuery+"&amount=5")
+        response = await this.axios.get("http://localhost:3000" + "/recipes/search?searchQuery="+this.searchQuery+"&amount=5"
+        );
+        recipes = response.data.results;
+        }
+        console.log(response);
         this.recipes = [];
         this.recipes.push(...recipes);
-        // console.log(this.recipes);
+        console.log(this.recipes);
       } catch (error) {
         console.log(error);
-      }
+       }
+      // try {
+      //   console.log( "http://localhost:3000" + "/recipes/random")
+      //   const response = await this.axios.get(
+      //      "http://localhost:3000" + "/recipes/random",
+      //      //this.$root.store.server_domain
+      //   );
+      //   console.log(response);
+      //   const recipes = response.data.recipes;
+      //   this.recipes = [];
+      //   this.recipes.push(...recipes);
+      //   console.log(this.recipes);
+      // } catch (error) {
+      //   console.log(error);
+      // }
+      
     }
   }
 };

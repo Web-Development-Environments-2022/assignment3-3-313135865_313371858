@@ -25,7 +25,11 @@
             />
           </div>
           <br>
-          <b-button href='#' variant="primary" @click="Click"> Search</b-button>
+          <b-button href='#' variant="primary" @click="searchClick"> Search</b-button>
+          <div v-if="searched">
+          <br>
+          <RecipePreviewList title="Search results" previewType="Search" :searchQuery="searchText" />
+          </div>
         </div>
       </div>
     </div>
@@ -34,10 +38,15 @@
 
 
 <script>
+import RecipePreviewList from "../components/RecipePreviewList";
 export default {
+  components: {
+    RecipePreviewList
+    },
   computed: {},
   data() {
     return {
+      searched: false,
       searchText: "",
     };
   },
@@ -46,10 +55,10 @@ export default {
       // this.searchText = "Test"
       this.$emit("search", this.searchText);
     },
-    Click(){
+    searchClick(){
       console.log(this.searchText)
+      this.searched = true
     }
-
   },
 };
 </script>

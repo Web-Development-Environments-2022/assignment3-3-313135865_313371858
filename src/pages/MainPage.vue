@@ -4,7 +4,7 @@
     <RecipePreviewList title="Random Recipes" class="RandomRecipes center" />
     <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to vue this</router-link>
     {{ !$root.store.username }}
-    <RecipePreviewList
+    <!-- <RecipePreviewList
       title="Last Viewed Recipes"
       :class="{
         RandomRecipes: true,
@@ -12,7 +12,7 @@
         center: true
       }"
       disabled
-    ></RecipePreviewList>
+    ></RecipePreviewList> -->
     <!-- <div
       style="position: absolute;top: 70%;left: 50%;transform: translate(-50%, -50%);"
     >
