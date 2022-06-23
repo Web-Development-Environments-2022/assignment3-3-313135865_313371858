@@ -3,7 +3,6 @@
     <div id="nav">
       <router-link :to="{ name: 'main' }">Vue Recipes</router-link>|
       <router-link :to="{ name: 'search' }">Search</router-link>|
-      {{ !$root.store.username }}
       <span v-if="!$root.store.username">
         Guest:
         <router-link :to="{ name: 'register' }">Register</router-link>|
@@ -12,6 +11,7 @@
       <span v-else>
         <router-link :to="{ name:'favorites'}">Favorite Recipes</router-link>|
         <router-link :to="{ name:'personal'}">Personal Recipes</router-link>|
+        <router-link :to="{ name:'family'}">Family Recipes</router-link>|
         {{ $root.store.username }}: <button @click="Logout">Logout</button>|
         
       </span>

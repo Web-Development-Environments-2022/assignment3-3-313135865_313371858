@@ -22,11 +22,6 @@
           </div>
         </div>
       </div>
-      <!-- <pre>
-      {{ $route.params }}
-      {{ recipe }}
-    </pre
-      > -->
     </div>
   </div>
 </template>
@@ -41,30 +36,45 @@ export default {
 
   
   async created() {
-    try {
-      let response;
+      console.log(this.$route.params.recipeType)
+    let response;
+      if (this.$route.params.recipeType == "Personal"){
+    
       try {
-
         console.log("http://localhost:3000/users/personalRecipe")
         response = await this.axios.get("http://localhost:3000/users/personalRecipe");
         console.log(response)
-
-
       } catch (error) {
         console.log("error.response.status", error.response.status);
         this.$router.replace("/NotFound");
         return;
       }
+        
+      }
+      
+      else if(this.$route.params.recipeType == "Family"){
+        try{
+        console.log("http://localhost:3000/users/familyRecipes")
+        response = await this.axios.get("http://localhost:3000/users/familyRecipes");
+        console.log(response)
+      }
+      catch (error) {
+        console.log("error.response.status", error.response.status);
+        this.$router.replace("/NotFound");
+        return;}
+      }
 
-
+      console.log(response.data)
+      console.log(this.$route.params.recipeId)
       var result = response.data.filter(obj => {
         return obj.id === this.$route.params.recipeId
         })
 
       this.recipe = result[0]
-
+    
       console.log(this.recipe)
       console.log(this.recipe.title)
+   
     //   this.recipe =  {
     //     instructions,
     //     extendedIngredients,
@@ -73,10 +83,6 @@ export default {
     //     image,
     //     title
     //   } = result;
-
-    } catch (error) {
-      console.log(error);
-    }
   }
 };
 </script>

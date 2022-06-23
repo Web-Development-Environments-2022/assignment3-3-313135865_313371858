@@ -73,6 +73,10 @@ export default {
         else if(this.title == "Personal Recipes"){
             this.personalRecipes()
         }
+
+        else if(this.title == "Family Recipes"){
+            this.familyRecipes()
+        }
         
      
       } catch (error) {
@@ -119,7 +123,7 @@ export default {
   async favoriteRecipes(){
         let response;
         let recipes;
-        console.log( "http://localhost:3000/users/favorites")
+        console.log("http://localhost:3000/users/favorites")
         
         response = await this.axios.get("http://localhost:3000/users/favorites"
         );
@@ -137,6 +141,21 @@ export default {
         console.log( "http://localhost:3000/users/personalRecipe")
         
         response = await this.axios.get("http://localhost:3000/users/personalRecipe"
+        );
+
+        recipes = response.data;
+        console.log(response);
+        this.recipes = [];
+        this.recipes.push(...recipes);
+        console.log(this.recipes);
+        
+  },
+  async familyRecipes(){
+        let response;
+        let recipes;
+        console.log( "http://localhost:3000/users/familyRecipes")
+        
+        response = await this.axios.get("http://localhost:3000/users/familyRecipes"
         );
 
         recipes = response.data;

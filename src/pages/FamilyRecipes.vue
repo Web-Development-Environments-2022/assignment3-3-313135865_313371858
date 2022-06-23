@@ -1,7 +1,8 @@
+
 <template>
   <div class="container">
-<h1 class="Favorites">Personal Recipes</h1>
-    <RecipePreviewList title="Personal Recipes" class="RandomRecipes center" />
+<h1 class="Favorites">Family Recipes</h1>
+    <RecipePreviewList title="Family Recipes" class="RandomRecipes center" />
 </div>
 </template>
 

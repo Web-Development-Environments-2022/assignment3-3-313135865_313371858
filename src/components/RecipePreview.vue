@@ -38,11 +38,17 @@
     :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
     class="recipe-preview"
   >
-   Works!
+   <b-button  variant="primary">View recipe</b-button>
   </router-link>
-  <router-link v-else :to="{ name: 'dbrecipes', params: { recipeId: recipe.id }}"
+
+  <router-link v-else-if = "!(recipe.recipe_owner)" :to="{ name: 'dbrecipes', params: { recipeId: recipe.id , recipeType: 'Personal'}}"
     class="recipe-preview"> 
-      Works!
+      <b-button variant="primary">View recipe</b-button>
+    </router-link >
+
+  <router-link v-else :to="{ name: 'dbrecipes', params: { recipeId: recipe.id , recipeType: 'Family'}}"
+    class="recipe-preview"> 
+      <b-button variant="primary">View recipe</b-button>
     </router-link >
 </div>
   
@@ -65,30 +71,6 @@ export default {
       type: Object,
       required: true
     }
-
-    // id: {
-    //   type: Number,
-    //   required: true
-    // },
-    // title: {
-    //   type: String,
-    //   required: true
-    // },
-    // readyInMinutes: {
-    //   type: Number,
-    //   required: true
-    // },
-    // image: {
-    //   type: String,
-    //   required: true
-    // },
-    // aggregateLikes: {
-    //   type: Number,
-    //   required: false,
-    //   default() {
-    //     return undefined;
-    //   }
-    // }
   }
 };
 </script>
