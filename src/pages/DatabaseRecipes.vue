@@ -40,7 +40,7 @@ export default {
       try {
         console.log("http://localhost:3000/users/personalRecipe");
         response = await this.axios.get(
-          "http://localhost:3000/users/personalRecipe"
+          "http://localhost:3000/users/personalRecipe",{withCredentials: true}
         );
         console.log(response);
       } catch (error) {
@@ -52,7 +52,7 @@ export default {
       try {
         console.log("http://localhost:3000/users/familyRecipes");
         response = await this.axios.get(
-          "http://localhost:3000/users/familyRecipes"
+          "http://localhost:3000/users/familyRecipes",{withCredentials: true}
         );
         console.log(response);
       } catch (error) {

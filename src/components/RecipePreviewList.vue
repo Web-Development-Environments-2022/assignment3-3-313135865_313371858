@@ -80,7 +80,7 @@ export default {
       let recipes;
       console.log("http://localhost:3000" + "/recipes/random");
       response = await this.axios.get(
-        "http://localhost:3000" + "/recipes/random"
+        "http://localhost:3000" + "/recipes/random",{withCredentials: true}
         //this.$root.store.server_domain
       );
 
@@ -98,13 +98,13 @@ export default {
         "http://localhost:3000" +
           "/recipes/search?searchQuery=" +
           this.searchQuery +
-          "&amount=5"
+          "&amount=5",{withCredentials: true}
       );
       response = await this.axios.get(
         "http://localhost:3000" +
           "/recipes/search?searchQuery=" +
           this.searchQuery +
-          "&amount=5"
+          "&amount=5",{withCredentials: true}
       );
       recipes = response.data;
 
@@ -123,7 +123,7 @@ export default {
       let recipes;
       console.log("http://localhost:3000/users/favorites");
 
-      response = await this.axios.get("http://localhost:3000/users/favorites");
+      response = await this.axios.get("http://localhost:3000/users/favorites",{withCredentials: true});
 
       recipes = response.data;
       console.log(response);
@@ -137,7 +137,7 @@ export default {
       console.log("http://localhost:3000/users/personalRecipe");
 
       response = await this.axios.get(
-        "http://localhost:3000/users/personalRecipe"
+        "http://localhost:3000/users/personalRecipe",{withCredentials: true}
       );
 
       recipes = response.data;
@@ -152,7 +152,7 @@ export default {
       console.log("http://localhost:3000/users/familyRecipes");
 
       response = await this.axios.get(
-        "http://localhost:3000/users/familyRecipes"
+        "http://localhost:3000/users/familyRecipes",{withCredentials: true}
       );
 
       recipes = response.data;
