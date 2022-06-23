@@ -67,7 +67,7 @@ export default {
         
       }
         else if(this.title == "Favorite Recipes"){
-
+            this.favoriteRecipes()
         }
         
      
@@ -115,8 +115,9 @@ export default {
   async favoriteRecipes(){
         let response;
         let recipes;
-    console.log( "http://localhost:3000" + "/users/users/favorites")
-        response = await this.axios.get("http://localhost:3000" + "/users/users/favorites"
+        console.log( "http://localhost:3000/users/favorites")
+        
+        response = await this.axios.get("http://localhost:3000/users/favorites"
         );
 
         recipes = response.data;
