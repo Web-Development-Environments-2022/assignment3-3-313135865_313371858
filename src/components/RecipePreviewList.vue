@@ -58,23 +58,48 @@ export default {
   methods: {
     async updateRecipes() {
       try {
+        if (this.title == "Random Recipes"){ // Random recipes.
+            this.randomRecipes()
+        }
 
+        else if (this.title == "Search results"){ // Search for recipes.
+            this.searchRecipes()
+        
+      }
+        else if(this.title == "Favorite Recipes"){
+
+        }
+        
+     
+      } catch (error) {
+        console.log(error);
+       }
+    
+    },
+    async randomRecipes(){
         let response;
         let recipes;
-        if (!this.searchQuery){ // Random recipes.
         console.log( "http://localhost:3000" + "/recipes/random")
         response = await this.axios.get("http://localhost:3000" + "/recipes/random",
            //this.$root.store.server_domain
         );
 
-        recipes = response.data.recipes}
-        else{ // Search for recipes.
-          
-        console.log( "http://localhost:3000" + "/recipes/search?searchQuery="+this.searchQuery+"&amount=5")
+        recipes = response.data.recipes
+        console.log(response);
+        this.recipes = [];
+        this.recipes.push(...recipes);
+        console.log(this.recipes);
+        
+    },
+
+    async searchRecipes(){
+        let response;
+        let recipes;
+    console.log( "http://localhost:3000" + "/recipes/search?searchQuery="+this.searchQuery+"&amount=5")
         response = await this.axios.get("http://localhost:3000" + "/recipes/search?searchQuery="+this.searchQuery+"&amount=5"
         );
         recipes = response.data;
-        }
+        
 
         if (recipes == "No results!"){ // When there are no results.
           this.no_results = true
@@ -86,13 +111,21 @@ export default {
           this.recipes.push(...recipes);
           console.log(this.recipes);
         }
+  },
+  async favoriteRecipes(){
+        let response;
+        let recipes;
+    console.log( "http://localhost:3000" + "/users/users/favorites")
+        response = await this.axios.get("http://localhost:3000" + "/users/users/favorites"
+        );
+
+        recipes = response.data;
+        console.log(response);
+        this.recipes = [];
+        this.recipes.push(...recipes);
+        console.log(this.recipes);
         
-     
-      } catch (error) {
-        console.log(error);
-       }
-    
-    }
+  }
   }
 };
 </script>
