@@ -20,10 +20,7 @@
   </router-link> -->
 
 <div>
-  <router-link
-    :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
-    class="recipe-preview"
-  >
+ 
   <b-card
     :title="recipe.title"
     :img-src="recipe.image"
@@ -37,7 +34,16 @@
       A great recipe! the duration is {{ recipe.readyInMinutes }} minutes and the {{ recipe.aggregateLikes }} likes
     </b-card-text>
   </b-card>
+   <router-link v-if = "!(recipe.user_id)"
+    :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
+    class="recipe-preview"
+  >
+   Works!
   </router-link>
+  <router-link v-else :to="{ name: 'dbrecipes', params: { recipeId: recipe.id }}"
+    class="recipe-preview"> 
+      Works!
+    </router-link >
 </div>
   
 </template>
