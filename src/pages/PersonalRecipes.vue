@@ -2,7 +2,7 @@
 <template>
   <div class="container">
 <h1 class="Favorites">Main Page</h1>
-    <RecipePreviewList title="Favorite Recipes" class="RandomRecipes center" />
+    <RecipePreviewList title="Personal Recipes" class="RandomRecipes center" />
 </div>
 </template>
 
