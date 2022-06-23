@@ -70,7 +70,10 @@ export default {
           this.personalRecipes();
         } else if (this.title == "Family Recipes") {
           this.familyRecipes();
+        } else if (this.title == "Last Viewed Recipes"){
+          this.lastViewedRecipes();
         }
+        
       } catch (error) {
         console.log(error);
       }
@@ -161,6 +164,22 @@ export default {
       this.recipes.push(...recipes);
       console.log(this.recipes);
     },
+    async lastViewedRecipes(){
+      let response;
+      let recipes;
+      console.log("http://localhost:3000/users/getLastSeen");
+
+      response = await this.axios.get(
+        "http://localhost:3000/users/getLastSeen",{withCredentials: true}
+      );
+
+      recipes = response.data;
+      console.log(response);
+      this.recipes = [];
+      this.recipes.push(...recipes);
+      console.log(this.recipes);
+
+    }
   },
 };
 </script>

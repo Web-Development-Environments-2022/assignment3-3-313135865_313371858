@@ -61,7 +61,7 @@ export default {
         );
         response = await this.axios.get(
           "http://localhost:3000/recipes/recipeFullDetails?recipeId=" +
-            this.$route.params.recipeId
+            this.$route.params.recipeId,{withCredentials: true}
         );
         // "https://test-for-3-2.herokuapp.com/recipes/info",
 
