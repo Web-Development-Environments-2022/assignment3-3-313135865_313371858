@@ -26,6 +26,46 @@
       </b-form-group>
 
       <b-form-group
+        id="input-group-firstName"
+        label-cols-sm="3"
+        label="FirstName:"
+        label-for="firstName"
+      >
+        <b-form-input
+          id="firstName"
+          v-model="$v.form.firstName.$model"
+          type="text"
+          :state="validateState('firstName')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.firstName.required">
+          first Name is required
+        </b-form-invalid-feedback>
+        <b-form-invalid-feedback v-if="!$v.form.firstName.alpha">
+          First Name should contain only letters
+        </b-form-invalid-feedback>
+      </b-form-group>
+
+      <b-form-group
+        id="input-group-lastName"
+        label-cols-sm="3"
+        label="LastName:"
+        label-for="lastName"
+      >
+        <b-form-input
+          id="lastName"
+          v-model="$v.form.lastName.$model"
+          type="text"
+          :state="validateState('lastName')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.lastName.required">
+          Last Name is required
+        </b-form-invalid-feedback>
+        <b-form-invalid-feedback v-if="!$v.form.lastName.alpha">
+          Last Name should contain only letters
+        </b-form-invalid-feedback>
+      </b-form-group>
+
+      <b-form-group
         id="input-group-country"
         label-cols-sm="3"
         label="Country:"
@@ -57,6 +97,9 @@
         <b-form-invalid-feedback v-if="!$v.form.password.required">
           Password is required
         </b-form-invalid-feedback>
+        <b-form-invalid-feedback v-if="!$v.form.password.alphaNum">
+          Last Name should contain only letters
+        </b-form-invalid-feedback>
         <b-form-text v-else-if="$v.form.password.$error" text-variant="info">
           Your password should be <strong>strong</strong>. <br />
           For that, your password should be also:
@@ -83,10 +126,36 @@
         <b-form-invalid-feedback v-if="!$v.form.confirmedPassword.required">
           Password confirmation is required
         </b-form-invalid-feedback>
+        <b-form-invalid-feedback v-if="!$v.form.confirmedPassword.alphaNum">
+          Last Name should contain only letters
+        </b-form-invalid-feedback>
         <b-form-invalid-feedback
           v-else-if="!$v.form.confirmedPassword.sameAsPassword"
         >
           The confirmed password is not equal to the original password
+        </b-form-invalid-feedback>
+      </b-form-group>
+
+
+      <b-form-group
+        id="input-group-email"
+        label-cols-sm="3"
+        label="Email:"
+        label-for="email"
+      >
+        <b-form-input
+          id="email"
+          v-model="$v.form.email.$model"
+          type="text"
+          :state="validateState('email')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.email.required">
+          Last Name is required
+        </b-form-invalid-feedback>
+        <b-form-invalid-feedback
+          v-if="$v.form.email.required && !$v.form.email.email"
+        >
+          Insert Valid Email
         </b-form-invalid-feedback>
       </b-form-group>
 
@@ -127,8 +196,12 @@ import {
   maxLength,
   alpha,
   sameAs,
-  email
+  email,
+  alphaNum,
+  helpers
 } from "vuelidate/lib/validators";
+
+// const passwordRegex = helpers.regex('passwordRegex', /^[a-zA-Z]*$/)
 
 export default {
   name: "Register",
@@ -156,16 +229,31 @@ export default {
         length: (u) => minLength(3)(u) && maxLength(8)(u),
         alpha
       },
+      firstName: {
+        required,
+        alpha
+      },
+      lastName: {
+        required,
+        alpha
+      },
       country: {
         required
       },
       password: {
         required,
-        length: (p) => minLength(5)(p) && maxLength(10)(p)
+        length: (p) => minLength(5)(p) && maxLength(10)(p),
+        alphaNum,
+
       },
       confirmedPassword: {
         required,
+        alphaNum,
         sameAsPassword: sameAs("password")
+      },
+      email: {
+        required,
+        email
       }
     }
   },
@@ -190,7 +278,11 @@ export default {
 
           {
             username: this.form.username,
-            password: this.form.password
+            password: this.form.password,
+            firstname: this.form.firstName,
+            lastname: this.form.lastName,
+            country: this.form.country,
+            email: this.form.email
           }
         );
         this.$router.push("/login");

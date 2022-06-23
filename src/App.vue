@@ -24,8 +24,18 @@
 export default {
   name: "App",
   methods: {
-    Logout() {
+    async Logout() {
       this.$root.store.logout();
+      try {
+        const response = await this.axios.post(
+
+          //TODO: need to change to the domain name and the address
+          "http://localhost:3000" +"/Logout"
+        );
+        }
+        catch{
+          this.$forceUpdate();
+        }
       this.$root.toast("Logout", "User logged out successfully", "success");
 
       this.$router.push("/").catch(() => {
