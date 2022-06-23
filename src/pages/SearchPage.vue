@@ -14,7 +14,7 @@
                 v-model="searchText"
                 class="form-control navbar-search-input js-navbar-search-input nav-input js-filter-topics"
                 type="text"
-                placeholder="Hummus"
+                placeholder="Pizza"
               />
             </div>
             <img
@@ -24,11 +24,19 @@
               height="17"
             />
           </div>
+          <div>
+          <br>
+          <b-dropdown text="Filter">
+            <b-dropdown-item  @click="switchAmount(5)">5</b-dropdown-item>
+            <b-dropdown-item  @click="switchAmount(10)">10</b-dropdown-item>
+            <b-dropdown-item  @click="switchAmount(15)">15</b-dropdown-item>
+          </b-dropdown>
+          </div>
           <br>
           <b-button href='#' variant="primary" @click="searchClick"> Search</b-button>
           <div v-if="trigger > 0">
           <br>
-          <RecipePreviewList title="Search results" :trigger="trigger" :searchQuery="searchText" />
+          <RecipePreviewList title="Search results" :trigger="trigger" :searchQuery="searchText" :amount="recipeAmount"/>
           </div>
         </div>
       </div>
@@ -48,6 +56,7 @@ export default {
     return {
       trigger: 0,
       searchText: "",
+      recipeAmount : 5
     };
   },
   methods: {
@@ -58,7 +67,9 @@ export default {
     searchClick(){
       this.trigger += 1
       console.log(this.searchText)
-      
+    },
+    switchAmount(amount){
+      this.recipeAmount = amount
     }
   },
 };
