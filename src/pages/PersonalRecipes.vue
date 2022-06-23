@@ -1,19 +1,18 @@
 <template>
   <div class="container">
-<h1 class="Favorites">Personal Recipes</h1>
+    <h1 class="Favorites">Personal Recipes</h1>
     <RecipePreviewList title="Personal Recipes" class="RandomRecipes center" />
-</div>
+  </div>
 </template>
 
 <script>
 import RecipePreviewList from "../components/RecipePreviewList";
 export default {
   components: {
-    RecipePreviewList
-  }
+    RecipePreviewList,
+  },
 };
 </script>
-
 
 <style lang="scss" scoped>
 .RandomRecipes {

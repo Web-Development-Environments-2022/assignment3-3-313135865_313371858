@@ -13,9 +13,8 @@
               <div>Likes: {{ recipe.aggregateLikes }} likes</div>
             </div>
             Ingredients:
-            {{recipe.instructions}}
-            <ul>
-            </ul>
+            {{ recipe.instructions }}
+            <ul></ul>
           </div>
           <div class="wrapped">
             Instructions:
@@ -30,51 +29,50 @@
 export default {
   data() {
     return {
-      recipe: null
+      recipe: null,
     };
   },
 
-  
   async created() {
-      console.log(this.$route.params.recipeType)
+    console.log(this.$route.params.recipeType);
     let response;
-      if (this.$route.params.recipeType == "Personal"){
-    
+    if (this.$route.params.recipeType == "Personal") {
       try {
-        console.log("http://localhost:3000/users/personalRecipe")
-        response = await this.axios.get("http://localhost:3000/users/personalRecipe");
-        console.log(response)
+        console.log("http://localhost:3000/users/personalRecipe");
+        response = await this.axios.get(
+          "http://localhost:3000/users/personalRecipe"
+        );
+        console.log(response);
       } catch (error) {
         console.log("error.response.status", error.response.status);
         this.$router.replace("/NotFound");
         return;
       }
-        
-      }
-      
-      else if(this.$route.params.recipeType == "Family"){
-        try{
-        console.log("http://localhost:3000/users/familyRecipes")
-        response = await this.axios.get("http://localhost:3000/users/familyRecipes");
-        console.log(response)
-      }
-      catch (error) {
+    } else if (this.$route.params.recipeType == "Family") {
+      try {
+        console.log("http://localhost:3000/users/familyRecipes");
+        response = await this.axios.get(
+          "http://localhost:3000/users/familyRecipes"
+        );
+        console.log(response);
+      } catch (error) {
         console.log("error.response.status", error.response.status);
         this.$router.replace("/NotFound");
-        return;}
+        return;
       }
+    }
 
-      console.log(response.data)
-      console.log(this.$route.params.recipeId)
-      var result = response.data.filter(obj => {
-        return obj.id === this.$route.params.recipeId
-        })
+    console.log(response.data);
+    console.log(this.$route.params.recipeId);
+    var result = response.data.filter((obj) => {
+      return obj.id === this.$route.params.recipeId;
+    });
 
-      this.recipe = result[0]
-    
-      console.log(this.recipe)
-      console.log(this.recipe.title)
-   
+    this.recipe = result[0];
+
+    console.log(this.recipe);
+    console.log(this.recipe.title);
+
     //   this.recipe =  {
     //     instructions,
     //     extendedIngredients,
@@ -83,7 +81,7 @@ export default {
     //     image,
     //     title
     //   } = result;
-  }
+  },
 };
 </script>
 

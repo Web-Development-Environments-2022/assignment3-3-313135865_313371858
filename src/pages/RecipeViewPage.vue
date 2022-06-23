@@ -45,30 +45,32 @@
 export default {
   data() {
     return {
-      recipe: null
+      recipe: null,
     };
   },
 
-  
   async created() {
     try {
       let response;
       // response = this.$route.params.response;
-    
+
       try {
-
-        console.log( "http://localhost:3000/recipes/recipeFullDetails?recipeId="+ this.$route.params.recipeId)
+        console.log(
+          "http://localhost:3000/recipes/recipeFullDetails?recipeId=" +
+            this.$route.params.recipeId
+        );
         response = await this.axios.get(
-          "http://localhost:3000/recipes/recipeFullDetails?recipeId="+ this.$route.params.recipeId);
-          // "https://test-for-3-2.herokuapp.com/recipes/info",
+          "http://localhost:3000/recipes/recipeFullDetails?recipeId=" +
+            this.$route.params.recipeId
+        );
+        // "https://test-for-3-2.herokuapp.com/recipes/info",
 
-          // this.$root.store.server_domain + "/recipes/info",
-          // {
-          //   params: { id: this.$route.params.recipeId }
-          // }
-          
+        // this.$root.store.server_domain + "/recipes/info",
+        // {
+        //   params: { id: this.$route.params.recipeId }
+        // }
+
         // console.log("response.status", response.status);
-
 
         if (response.status !== 200) this.$router.replace("/NotFound");
       } catch (error) {
@@ -76,7 +78,7 @@ export default {
         this.$router.replace("/NotFound");
         return;
       }
-      console.log(response)
+      console.log(response);
       let {
         analyzedInstructions,
         instructions,
@@ -84,7 +86,7 @@ export default {
         aggregateLikes,
         readyInMinutes,
         image,
-        title
+        title,
       } = response.data;
 
       let _instructions = analyzedInstructions
@@ -102,14 +104,14 @@ export default {
         aggregateLikes,
         readyInMinutes,
         image,
-        title
+        title,
       };
 
       this.recipe = _recipe;
     } catch (error) {
       console.log(error);
     }
-  }
+  },
 };
 </script>
 
