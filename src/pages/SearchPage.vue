@@ -8,42 +8,47 @@
         <div class="search-bar">
           <div class="form-holder">
             <div class="navbarSearch">
-              <input
-                @change="onChange"
-                @keyup="onChange"
-                v-model="searchText"
-                class="form-control navbar-search-input js-navbar-search-input nav-input js-filter-topics"
-                type="text"
-                placeholder="Pizza"
-              />
+              <input @change="onChange" @keyup="onChange" v-model="searchText"
+                class="form-control navbar-search-input js-navbar-search-input nav-input js-filter-topics" type="text"
+                placeholder="Pizza" />
             </div>
-            <img
-              class="icon"
-              src="https://hackr.io/assets/images/header-icons/search-header.svg"
-              width="17"
-              height="17"
-            />
+            <img class="icon" src="https://hackr.io/assets/images/header-icons/search-header.svg" width="17"
+              height="17" />
           </div>
           <div>
             <br />
-            <b-dropdown text="Filter">
+            <b-dropdown text="amount">
               <b-dropdown-item @click="switchAmount(5)">5</b-dropdown-item>
               <b-dropdown-item @click="switchAmount(10)">10</b-dropdown-item>
               <b-dropdown-item @click="switchAmount(15)">15</b-dropdown-item>
             </b-dropdown>
           </div>
-          <br />
+          <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
+            <b-form-group id="input-group-cuisine" label-cols-sm="3" label="Cuisine:" label-for="cuisine">
+              <b-form-select id="cuisine" :options="cuisines" v-model="cuisine"></b-form-select>
+            </b-form-group>
+            <br />
+          </b-form>
+          <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
+            <b-form-group id="input-group-diet" label-cols-sm="3" label="Diet:" label-for="diet">
+              <b-form-select id="diet" :options="diets" v-model="diet"></b-form-select>
+            </b-form-group>
+          </b-form>
+          <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
+            <b-form-group id="input-group-intolerance" label-cols-sm="3" label="Intolerance:" label-for="intolerance">
+              <b-form-select id="intolerance" :options="intolerances" v-model="intolerance"></b-form-select>
+            </b-form-group>
+            <br />
+          </b-form>
+
+
+
           <b-button href="#" variant="primary" @click="searchClick">
-            Search</b-button
-          >
+            Search</b-button>
           <div v-if="trigger > 0">
             <br />
-            <RecipePreviewList
-              title="Search results"
-              :trigger="trigger"
-              :searchQuery="searchText"
-              :amount="recipeAmount"
-            />
+            <RecipePreviewList title="Search results" :trigger="trigger" :searchQuery="searchText"
+              :amount="recipeAmount" :cuisine="cuisine" :diet="diet" :intolerance="intolerance" />
           </div>
         </div>
       </div>
@@ -53,6 +58,9 @@
 
 <script>
 import RecipePreviewList from "../components/RecipePreviewList";
+import cuisine from "../assets/cuisine";
+import diet from "../assets/diet";
+import intolerance from "../assets/intolerance";
 export default {
   components: {
     RecipePreviewList,
@@ -63,7 +71,25 @@ export default {
       trigger: 0,
       searchText: "",
       recipeAmount: 5,
+      form: {
+        cuisine: null,
+        diet: null,
+        intolerance: null,
+      },
+      cuisines: [{ value: null, text: "", disabled: true }],
+      diets: [{ value: null, text: "", disabled: true }],
+      intolerances: [{ value: null, text: "", disabled: true }],
+      errors: [],
+      validated: false,
+
     };
+  },
+  mounted() {
+    // console.log("mounted");
+    this.cuisines.push(...cuisine);
+    this.diets.push(...diet);
+    this.intolerances.push(...intolerance);
+    // console.log($v);
   },
   methods: {
     onChange() {
@@ -84,6 +110,7 @@ export default {
 <style lang="scss">
 .search-holder {
   margin-top: 60px;
+
   &__banner {
     margin: 0 auto;
     width: 80%;
@@ -91,6 +118,7 @@ export default {
     padding-right: 15px;
     text-align: center;
   }
+
   &__fullbanner {
     margin: 0 auto;
     width: 100%;
@@ -98,15 +126,18 @@ export default {
     padding-right: 15px;
     text-align: center;
   }
+
   .hero-header {
     margin: 0 0 25px;
     line-height: 1;
     font-size: 34px;
   }
+
   .search-bar {
     .form-holder {
       position: relative;
     }
+
     .form-control {
       display: block;
       width: 100%;
@@ -127,6 +158,7 @@ export default {
         box-shadow ease-in-out 0.15s;
       transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
     }
+
     .navbar-search-input {
       z-index: 1 !important;
       height: 51px;
@@ -136,6 +168,7 @@ export default {
       box-shadow: 0 2px 14px rgba(0, 0, 0, 0.11);
       border-color: #eeeeee;
     }
+
     .icon {
       left: 12px;
       font-size: 18px;
