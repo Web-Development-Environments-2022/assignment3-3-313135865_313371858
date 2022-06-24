@@ -5,16 +5,26 @@
       <router-link :to="{ name: 'search' }">Search</router-link>|
       <router-link :to="{ name: 'about' }">About Us</router-link>|
       <span v-if="!$root.store.username">
-        Guest:
         <router-link :to="{ name: 'register' }">Register</router-link>|
         <router-link :to="{ name: 'login' }">Login</router-link>|
       </span>
       <span v-else>
-        <router-link :to="{ name:'favorites'}">Favorite Recipes</router-link>|
-        <router-link :to="{ name:'personal'}">Personal Recipes</router-link>|
-        <router-link :to="{ name:'family'}">Family Recipes</router-link>|
-        {{ $root.store.username }}: <button @click="Logout">Logout</button>|
-        
+        <router-link :to="{ name: 'favorites' }">Favorite Recipes</router-link>|
+        <router-link :to="{ name: 'personal' }">Personal Recipes</router-link>|
+        <router-link :to="{ name: 'family' }">Family Recipes</router-link>|
+        <div id="right">
+          Guest: {{ $root.store.username }}
+          <button
+            type="button"
+            class="btn btn-primary"
+            style="
+        height: 20px;
+        line-height: 3px;"
+            @click="Logout"
+          >
+            Logout
+          </button>
+        </div>
       </span>
     </div>
     <router-view />
@@ -29,21 +39,19 @@ export default {
       this.$root.store.logout();
       try {
         const response = await this.axios.post(
-
           //TODO: need to change to the domain name and the address
-          "http://localhost:3000" +"/Logout"
+          "http://localhost:3000" + "/Logout"
         );
-        }
-        catch{
-          this.$forceUpdate();
-        }
+      } catch {
+        this.$forceUpdate();
+      }
       this.$root.toast("Logout", "User logged out successfully", "success");
 
       this.$router.push("/").catch(() => {
         this.$forceUpdate();
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -69,5 +77,10 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+#right {
+  float: right;
+  width: 500px;
 }
 </style>
