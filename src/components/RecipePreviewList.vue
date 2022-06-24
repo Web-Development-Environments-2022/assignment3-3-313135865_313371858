@@ -197,6 +197,7 @@ export default {
   min-height: 400px;
 }
 .row {
+    justify-content: center;
     display: flex;
     flex-wrap: wrap;
     margin-right: 30px;
