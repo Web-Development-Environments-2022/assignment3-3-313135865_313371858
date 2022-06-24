@@ -39,7 +39,19 @@ export default {
     amount:{
       type: Number,
       required: false
-    }
+    },
+    cuisine:{
+      type: String,
+      required: false,
+    },
+    diet:{
+      type: String,
+      required: false,
+    },
+    intolerance:{
+      type: String,
+      required: false,
+    },
   },
   watch: {
     trigger: function() {
@@ -102,9 +114,9 @@ export default {
       let response;
       let recipes;
       console.log(
-        "http://localhost:3000" + "/recipes/search?searchQuery="+this.searchQuery+"&amount="+this.amount ,{withCredentials: true}
+        "http://localhost:3000" + "/recipes/search?searchQuery="+this.searchQuery+"&amount="+this.amount+"&cuisine="+this.cuisine+"&diet="+this.diet+"&intolerance="+this.intolerance ,{withCredentials: true}
       );
-      response = await this.axios.get("http://localhost:3000" + "/recipes/search?searchQuery="+this.searchQuery+"&amount="+this.amount ,{withCredentials: true}
+      response = await this.axios.get("http://localhost:3000" + "/recipes/search?searchQuery="+this.searchQuery+"&amount="+this.amount+"&cuisine="+this.cuisine+"&diet="+this.diet+"&intolerance="+this.intolerance ,{withCredentials: true}
       );
       recipes = response.data;
 
