@@ -24,7 +24,7 @@
       img-alt="Image"
       img-top
       tag="article"
-      style="max-width: 20rem;"
+      style="width: 15rem;;"
       class="mb-2"
     >
       <b-card-text>

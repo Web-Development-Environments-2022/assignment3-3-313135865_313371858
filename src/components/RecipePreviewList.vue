@@ -9,9 +9,9 @@
     </div>
     <div v-else>
       <b-row>
-        <b-col v-for="r in recipes" :key="r.id">
+        <b-row v-for="r in recipes" :key="r.id">
           <RecipePreview class="recipePreview" :recipe="r" />
-        </b-col>
+        </b-row>
       </b-row>  
     </div>
   </b-container>
@@ -195,5 +195,11 @@ export default {
 <style lang="scss" scoped>
 .container {
   min-height: 400px;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: 30px;
+    margin-left: -15px;
 }
 </style>

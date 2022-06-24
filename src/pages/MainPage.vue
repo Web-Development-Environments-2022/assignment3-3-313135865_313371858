@@ -1,10 +1,15 @@
 <template>
+
   <div class="container">
     <h1 class="title">Main Page</h1>
+    <div id="right">
     <RecipePreviewList title="Random Recipes" class="RandomRecipes center" />
     <router-link v-if="!$root.store.username" to="/login" tag="button"
       >You need to Login to vue this</router-link
     >
+</div>
+
+<div id="left">
     <RecipePreviewList
       title="Last Viewed Recipes"
       :class="{
@@ -14,6 +19,7 @@
       }"
       disabled
     ></RecipePreviewList> 
+    </div>
     <div
       style="position: absolute;top: 70%;left: 50%;transform: translate(-50%, -50%);"
     >
@@ -42,4 +48,11 @@ export default {
   pointer-events: none;
   cursor: default;
 }
+
+#container{width:100%;}
+#left{float:left;width:500px;}
+#right{float:right;width:500px;}
+
+
 </style>
+
