@@ -43,18 +43,18 @@
           </div>
           <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
             <b-form-group id="input-group-cuisine" label-cols-sm="3" label="Cuisine:" label-for="cuisine">
-              <b-form-select id="cuisine" :options="cuisines" v-model="cuisine"></b-form-select>
+              <b-form-select id="cuisine" :options="cuisines" v-model="form.cuisine"></b-form-select>
             </b-form-group>
             <br />
           </b-form>
           <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
             <b-form-group id="input-group-diet" label-cols-sm="3" label="Diet:" label-for="diet">
-              <b-form-select id="diet" :options="diets" v-model="diet"></b-form-select>
+              <b-form-select id="diet" :options="diets" v-model="form.diet"></b-form-select>
             </b-form-group>
           </b-form>
           <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
             <b-form-group id="input-group-intolerance" label-cols-sm="3" label="Intolerance:" label-for="intolerance">
-              <b-form-select id="intolerance" :options="intolerances" v-model="intolerance"></b-form-select>
+              <b-form-select id="intolerance" :options="intolerances" v-model="form.intolerance"></b-form-select>
             </b-form-group>
             <br />
           </b-form>
@@ -66,7 +66,7 @@
           <div v-if="trigger > 0">
             <br />
             <RecipePreviewList title="Search results" :trigger="trigger" :searchQuery="searchText"
-              :amount="recipeAmount" :cuisine="cuisine" :diet="diet" :intolerance="intolerance" />
+              :amount="recipeAmount" :cuisine="form.cuisine" :diet="form.diet" :intolerance="form.intolerance" />
           </div>
         </div>
       </div>
@@ -92,9 +92,9 @@ export default {
       recipeAmount: 5,
       lastSearched: "",
       form: {
-        cuisine: null,
-        diet: null,
-        intolerance: null,
+        cuisine: "",
+        diet: "",
+        intolerance: "",
       },
       cuisines: [{ value: null, text: "", disabled: true }],
       diets: [{ value: null, text: "", disabled: true }],
