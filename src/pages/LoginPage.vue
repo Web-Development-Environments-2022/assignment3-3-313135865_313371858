@@ -94,8 +94,6 @@ export default {
     async Login() {
       try {
         const response = await this.axios.post(
-          // "https://test-for-3-2.herokuapp.com/user/Login",
-
           //TODO: need to change to the domain name and the address
 
           "http://localhost:3000" + "/Login",

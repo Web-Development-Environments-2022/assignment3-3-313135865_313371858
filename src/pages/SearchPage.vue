@@ -14,15 +14,24 @@
                 v-model="searchText"
                 class="form-control navbar-search-input js-navbar-search-input nav-input js-filter-topics"
                 type="text"
-                placeholder="Pizza"
+                placeholder="For example: Pizza"
               />
             </div>
             <img
               class="icon"
               src="https://hackr.io/assets/images/header-icons/search-header.svg"
-              width="17"
-              height="17"
+              width="23"
+              height="23"
             />
+          </div>
+          <br />
+          <div v-if="$root.store.username">
+            <div v-if="this.lastSearched">
+            Hint! You're last search was: {{this.lastSearched}}
+            </div>
+            <div v-else>
+            No Last searches
+            </div>
           </div>
           <div>
             <br />
@@ -52,6 +61,7 @@
 </template>
 
 <script>
+import { create } from "domain";
 import RecipePreviewList from "../components/RecipePreviewList";
 export default {
   components: {
@@ -63,7 +73,11 @@ export default {
       trigger: 0,
       searchText: "",
       recipeAmount: 5,
+      lastSearched: ""
     };
+  },
+  async created(){
+      this.getLastSearched()
   },
   methods: {
     onChange() {
@@ -72,11 +86,27 @@ export default {
     },
     searchClick() {
       this.trigger += 1;
+      this.getLastSearched() // Trigger the last seen.
       console.log(this.searchText);
     },
     switchAmount(amount) {
       this.recipeAmount = amount;
     },
+    async getLastSearched(){
+      let response
+          try {
+        console.log("http://localhost:3000/users/getLastSearched");
+        response = await this.axios.get(
+          "http://localhost:3000/users/getLastSearched",
+          1
+        );
+        console.log("Last seen is:")
+        console.log(response);
+        this.lastSearched = response.data
+        } catch (error) {
+          console.log(error)
+        }
+    }
   },
 };
 </script>

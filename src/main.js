@@ -4,6 +4,7 @@ import VueAxios from "vue-axios";
 import axios from "axios";
 import routes from "./routes";
 import VueRouter from "vue-router";
+axios.defaults.withCredentials = true;
 Vue.use(VueRouter);
 const router = new VueRouter({
   routes,

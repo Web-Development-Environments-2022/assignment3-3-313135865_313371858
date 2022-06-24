@@ -12,7 +12,7 @@
         <b-col v-for="r in recipes" :key="r.id">
           <RecipePreview class="recipePreview" :recipe="r" />
         </b-col>
-      </b-row>
+      </b-row>  
     </div>
   </b-container>
 </template>
@@ -122,7 +122,6 @@ export default {
       let response;
       let recipes;
       console.log("http://localhost:3000/users/favorites");
-
       response = await this.axios.get("http://localhost:3000/users/favorites",{withCredentials: true});
 
       recipes = response.data;
@@ -150,7 +149,6 @@ export default {
       let response;
       let recipes;
       console.log("http://localhost:3000/users/familyRecipes");
-
       response = await this.axios.get(
         "http://localhost:3000/users/familyRecipes",{withCredentials: true}
       );

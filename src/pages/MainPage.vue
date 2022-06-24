@@ -5,7 +5,6 @@
     <router-link v-if="!$root.store.username" to="/login" tag="button"
       >You need to Login to vue this</router-link
     >
-
     <RecipePreviewList
       title="Last Viewed Recipes"
       :class="{
