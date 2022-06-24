@@ -7,6 +7,7 @@
 </div>
 
 <div id="right">
+  
     <RecipePreviewList
       title="Last Viewed Recipes"
       :class="{

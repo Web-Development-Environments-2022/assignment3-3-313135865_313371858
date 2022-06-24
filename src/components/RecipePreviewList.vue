@@ -1,18 +1,25 @@
 <template>
   <b-container>
-    <h3>
-      {{ title }}:
-      <slot></slot>
-    </h3>
-    <div v-if="no_results">
-      No Results!
+    <div v-if="loading" class="text-center">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
     </div>
     <div v-else>
-      <b-row>
-        <b-row v-for="r in recipes" :key="r.id">
-          <RecipePreview class="recipePreview" :recipe="r" />
+      <h3>
+        {{ title }}:
+        <slot></slot>
+      </h3>
+      <div v-if="no_results">
+        No Results!
+      </div>
+      <div v-else>
+        <b-row>
+          <b-row v-for="r in recipes" :key="r.id">
+            <RecipePreview class="recipePreview" :recipe="r" />
+          </b-row>
         </b-row>
-      </b-row>  
+      </div>
     </div>
   </b-container>
 </template>
@@ -36,19 +43,19 @@ export default {
       type: String,
       required: false,
     },
-    amount:{
+    amount: {
       type: Number,
-      required: false
+      required: false,
     },
-    cuisine:{
+    cuisine: {
       type: String,
       required: false,
     },
-    diet:{
+    diet: {
       type: String,
       required: false,
     },
-    intolerance:{
+    intolerance: {
       type: String,
       required: false,
     },
@@ -66,9 +73,12 @@ export default {
     return {
       recipes: [],
       no_results: false,
+      loading : true
     };
   },
-  mounted() {
+  created(){
+    console.log("created")
+    console.log(this.loading)
     this.updateRecipes();
   },
   methods: {
@@ -77,19 +87,21 @@ export default {
       try {
         if (this.title == "Random Recipes") {
           // Random recipes.
-          this.randomRecipes();
+         await this.randomRecipes();
         } else if (this.title == "Search results") {
           // Search for recipes.
-          this.searchRecipes();
+          await this.searchRecipes();
         } else if (this.title == "Favorite Recipes") {
-          this.favoriteRecipes();
+          await this.favoriteRecipes();
         } else if (this.title == "Personal Recipes") {
-          this.personalRecipes();
+          await this.personalRecipes();
         } else if (this.title == "Family Recipes") {
-          this.familyRecipes();
-        } else if (this.title == "Last Viewed Recipes"){
-          this.lastViewedRecipes();
+          await this.familyRecipes();
+        } else if (this.title == "Last Viewed Recipes") {
+          await this.lastViewedRecipes();
         }
+         this.loading = false
+         console.log("loading has been reset")
         
       } catch (error) {
         console.log(error);
@@ -100,7 +112,8 @@ export default {
       let recipes;
       console.log("http://localhost:3000" + "/recipes/random");
       response = await this.axios.get(
-        "http://localhost:3000" + "/recipes/random",{withCredentials: true}
+        "http://localhost:3000" + "/recipes/random",
+        { withCredentials: true }
         //this.$root.store.server_domain
       );
 
@@ -115,9 +128,32 @@ export default {
       let response;
       let recipes;
       console.log(
-        "http://localhost:3000" + "/recipes/search?searchQuery="+this.searchQuery+"&amount="+this.amount+"&cuisine="+this.cuisine+"&diet="+this.diet+"&intolerance="+this.intolerance ,{withCredentials: true}
+        "http://localhost:3000" +
+          "/recipes/search?searchQuery=" +
+          this.searchQuery +
+          "&amount=" +
+          this.amount +
+          "&cuisine=" +
+          this.cuisine +
+          "&diet=" +
+          this.diet +
+          "&intolerance=" +
+          this.intolerance,
+        { withCredentials: true }
       );
-      response = await this.axios.get("http://localhost:3000" + "/recipes/search?searchQuery="+this.searchQuery+"&amount="+this.amount+"&cuisine="+this.cuisine+"&diet="+this.diet+"&intolerance="+this.intolerance ,{withCredentials: true}
+      response = await this.axios.get(
+        "http://localhost:3000" +
+          "/recipes/search?searchQuery=" +
+          this.searchQuery +
+          "&amount=" +
+          this.amount +
+          "&cuisine=" +
+          this.cuisine +
+          "&diet=" +
+          this.diet +
+          "&intolerance=" +
+          this.intolerance,
+        { withCredentials: true }
       );
       recipes = response.data;
 
@@ -135,7 +171,9 @@ export default {
       let response;
       let recipes;
       console.log("http://localhost:3000/users/favorites");
-      response = await this.axios.get("http://localhost:3000/users/favorites",{withCredentials: true});
+      response = await this.axios.get("http://localhost:3000/users/favorites", {
+        withCredentials: true,
+      });
 
       recipes = response.data;
       console.log(response);
@@ -149,7 +187,8 @@ export default {
       console.log("http://localhost:3000/users/personalRecipe");
 
       response = await this.axios.get(
-        "http://localhost:3000/users/personalRecipe",{withCredentials: true}
+        "http://localhost:3000/users/personalRecipe",
+        { withCredentials: true }
       );
 
       recipes = response.data;
@@ -163,7 +202,8 @@ export default {
       let recipes;
       console.log("http://localhost:3000/users/familyRecipes");
       response = await this.axios.get(
-        "http://localhost:3000/users/familyRecipes",{withCredentials: true}
+        "http://localhost:3000/users/familyRecipes",
+        { withCredentials: true }
       );
 
       recipes = response.data;
@@ -172,13 +212,14 @@ export default {
       this.recipes.push(...recipes);
       console.log(this.recipes);
     },
-    async lastViewedRecipes(){
+    async lastViewedRecipes() {
       let response;
       let recipes;
       console.log("http://localhost:3000/users/getLastSeen");
 
       response = await this.axios.get(
-        "http://localhost:3000/users/getLastSeen",{withCredentials: true}
+        "http://localhost:3000/users/getLastSeen",
+        { withCredentials: true }
       );
 
       recipes = response.data;
@@ -186,8 +227,7 @@ export default {
       this.recipes = [];
       this.recipes.push(...recipes);
       console.log(this.recipes);
-
-    }
+    },
   },
 };
 </script>
@@ -197,10 +237,10 @@ export default {
   min-height: 400px;
 }
 .row {
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
-    margin-right: 30px;
-    margin-left: -15px;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: 30px;
+  margin-left: -15px;
 }
 </style>
