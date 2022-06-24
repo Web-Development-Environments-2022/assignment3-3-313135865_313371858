@@ -136,7 +136,6 @@
         </b-form-invalid-feedback>
       </b-form-group>
 
-
       <b-form-group
         id="input-group-email"
         label-cols-sm="3"
@@ -198,7 +197,7 @@ import {
   sameAs,
   email,
   alphaNum,
-  helpers
+  helpers,
 } from "vuelidate/lib/validators";
 
 // const passwordRegex = helpers.regex('passwordRegex', /^[a-zA-Z]*$/)
@@ -215,11 +214,11 @@ export default {
         password: "",
         confirmedPassword: "",
         email: "",
-        submitError: undefined
+        submitError: undefined,
       },
       countries: [{ value: null, text: "", disabled: true }],
       errors: [],
-      validated: false
+      validated: false,
     };
   },
   validations: {
@@ -227,35 +226,34 @@ export default {
       username: {
         required,
         length: (u) => minLength(3)(u) && maxLength(8)(u),
-        alpha
+        alpha,
       },
       firstName: {
         required,
-        alpha
+        alpha,
       },
       lastName: {
         required,
-        alpha
+        alpha,
       },
       country: {
-        required
+        required,
       },
       password: {
         required,
         length: (p) => minLength(5)(p) && maxLength(10)(p),
         alphaNum,
-
       },
       confirmedPassword: {
         required,
         alphaNum,
-        sameAsPassword: sameAs("password")
+        sameAsPassword: sameAs("password"),
       },
       email: {
         required,
-        email
-      }
-    }
+        email,
+      },
+    },
   },
   mounted() {
     // console.log("mounted");
@@ -272,9 +270,9 @@ export default {
         const response = await this.axios.post(
           // "https://test-for-3-2.herokuapp.com/user/Register",
 
-          // TODO: change according the domain name 
+          // TODO: change according the domain name
           //this.$root.store.server_domain + "/Register",
-          "http://localhost:3000" +"/Register",
+          "http://localhost:3000" + "/Register",
 
           {
             username: this.form.username,
@@ -282,7 +280,7 @@ export default {
             firstname: this.form.firstName,
             lastname: this.form.lastName,
             country: this.form.country,
-            email: this.form.email
+            email: this.form.email,
           }
         );
         this.$router.push("/login");
@@ -309,13 +307,13 @@ export default {
         country: null,
         password: "",
         confirmedPassword: "",
-        email: ""
+        email: "",
       };
       this.$nextTick(() => {
         this.$v.$reset();
       });
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

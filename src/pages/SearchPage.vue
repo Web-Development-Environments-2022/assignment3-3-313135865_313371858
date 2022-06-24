@@ -25,18 +25,25 @@
             />
           </div>
           <div>
-          <br>
-          <b-dropdown text="Filter">
-            <b-dropdown-item  @click="switchAmount(5)">5</b-dropdown-item>
-            <b-dropdown-item  @click="switchAmount(10)">10</b-dropdown-item>
-            <b-dropdown-item  @click="switchAmount(15)">15</b-dropdown-item>
-          </b-dropdown>
+            <br />
+            <b-dropdown text="Filter">
+              <b-dropdown-item @click="switchAmount(5)">5</b-dropdown-item>
+              <b-dropdown-item @click="switchAmount(10)">10</b-dropdown-item>
+              <b-dropdown-item @click="switchAmount(15)">15</b-dropdown-item>
+            </b-dropdown>
           </div>
-          <br>
-          <b-button href='#' variant="primary" @click="searchClick"> Search</b-button>
+          <br />
+          <b-button href="#" variant="primary" @click="searchClick">
+            Search</b-button
+          >
           <div v-if="trigger > 0">
-          <br>
-          <RecipePreviewList title="Search results" :trigger="trigger" :searchQuery="searchText" :amount="recipeAmount"/>
+            <br />
+            <RecipePreviewList
+              title="Search results"
+              :trigger="trigger"
+              :searchQuery="searchText"
+              :amount="recipeAmount"
+            />
           </div>
         </div>
       </div>
@@ -44,19 +51,18 @@
   </div>
 </template>
 
-
 <script>
 import RecipePreviewList from "../components/RecipePreviewList";
 export default {
   components: {
-    RecipePreviewList
-    },
+    RecipePreviewList,
+  },
   computed: {},
   data() {
     return {
       trigger: 0,
       searchText: "",
-      recipeAmount : 5
+      recipeAmount: 5,
     };
   },
   methods: {
@@ -64,19 +70,16 @@ export default {
       // this.searchText = "Test"
       this.$emit("search", this.searchText);
     },
-    searchClick(){
-      this.trigger += 1
-      console.log(this.searchText)
+    searchClick() {
+      this.trigger += 1;
+      console.log(this.searchText);
     },
-    switchAmount(amount){
-      this.recipeAmount = amount
-    }
+    switchAmount(amount) {
+      this.recipeAmount = amount;
+    },
   },
 };
 </script>
-
-
-
 
 <style lang="scss">
 .search-holder {

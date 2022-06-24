@@ -1,7 +1,5 @@
 <template>
-
-
-<!-- <router-link
+  <!-- <router-link
     :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
     class="recipe-preview"
   >
@@ -19,39 +17,51 @@
     </div>
   </router-link> -->
 
-<div>
- 
-  <b-card
-    :title="recipe.title"
-    :img-src="recipe.image"
-    img-alt="Image"
-    img-top
-    tag="article"
-    style="max-width: 20rem;"
-    class="mb-2"
-  >
-    <b-card-text>
-      A great recipe! the duration is {{ recipe.readyInMinutes }} minutes and the {{ recipe.aggregateLikes }} likes
-    </b-card-text>
-  </b-card>
-   <router-link v-if = "!(recipe.user_id)"
-    :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
-    class="recipe-preview"
-  >
-   <b-button  variant="primary">View recipe</b-button>
-  </router-link>
-
-  <router-link v-else-if = "!(recipe.recipe_owner)" :to="{ name: 'dbrecipes', params: { recipeId: recipe.id , recipeType: 'Personal'}}"
-    class="recipe-preview"> 
+  <div>
+    <b-card
+      :title="recipe.title"
+      :img-src="recipe.image"
+      img-alt="Image"
+      img-top
+      tag="article"
+      style="max-width: 20rem;"
+      class="mb-2"
+    >
+      <b-card-text>
+        A great recipe! the duration is {{ recipe.readyInMinutes }} minutes and
+        the {{ recipe.aggregateLikes }} likes
+      </b-card-text>
+    </b-card>
+    <router-link
+      v-if="!recipe.user_id"
+      :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
+      class="recipe-preview"
+    >
       <b-button variant="primary">View recipe</b-button>
-    </router-link >
+    </router-link>
 
-  <router-link v-else :to="{ name: 'dbrecipes', params: { recipeId: recipe.id , recipeType: 'Family'}}"
-    class="recipe-preview"> 
+    <router-link
+      v-else-if="!recipe.recipe_owner"
+      :to="{
+        name: 'dbrecipes',
+        params: { recipeId: recipe.id, recipeType: 'Personal' },
+      }"
+      class="recipe-preview"
+    >
       <b-button variant="primary">View recipe</b-button>
-    </router-link >
-</div>
-  
+    </router-link>
+
+    <router-link
+      v-else
+      :to="{
+        name: 'dbrecipes',
+        params: { recipeId: recipe.id, recipeType: 'Family' },
+      }"
+      class="recipe-preview"
+    >
+      <b-button variant="primary">View recipe</b-button>
+    </router-link>
+  </div>
 </template>
 
 <script>
@@ -63,15 +73,15 @@ export default {
   },
   data() {
     return {
-      image_load: false
+      image_load: false,
     };
   },
   props: {
     recipe: {
       type: Object,
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 };
 </script>
 
