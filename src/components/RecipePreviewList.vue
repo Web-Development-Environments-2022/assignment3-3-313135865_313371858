@@ -73,6 +73,7 @@ export default {
   },
   methods: {
     async updateRecipes() {
+      this.no_results = false;
       try {
         if (this.title == "Random Recipes") {
           // Random recipes.

@@ -27,10 +27,10 @@
           <br />
           <div v-if="$root.store.username">
             <div v-if="this.lastSearched">
-            Hint! You're last search was: {{this.lastSearched}}
+              Hint! You're last search was: {{ this.lastSearched }}
             </div>
             <div v-else>
-            No Last searches
+              No Last searches
             </div>
           </div>
           <div>
@@ -42,31 +42,64 @@
             </b-dropdown>
           </div>
           <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
-            <b-form-group id="input-group-cuisine" label-cols-sm="3" label="Cuisine:" label-for="cuisine">
-              <b-form-select id="cuisine" :options="cuisines" v-model="form.cuisine"></b-form-select>
+            <b-form-group
+              id="input-group-cuisine"
+              label-cols-sm="3"
+              label="Cuisine:"
+              label-for="cuisine"
+            >
+              <b-form-select
+                id="cuisine"
+                :options="cuisines"
+                v-model="form.cuisine"
+              ></b-form-select>
             </b-form-group>
             <br />
           </b-form>
           <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
-            <b-form-group id="input-group-diet" label-cols-sm="3" label="Diet:" label-for="diet">
-              <b-form-select id="diet" :options="diets" v-model="form.diet"></b-form-select>
+            <b-form-group
+              id="input-group-diet"
+              label-cols-sm="3"
+              label="Diet:"
+              label-for="diet"
+            >
+              <b-form-select
+                id="diet"
+                :options="diets"
+                v-model="form.diet"
+              ></b-form-select>
             </b-form-group>
           </b-form>
           <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
-            <b-form-group id="input-group-intolerance" label-cols-sm="3" label="Intolerance:" label-for="intolerance">
-              <b-form-select id="intolerance" :options="intolerances" v-model="form.intolerance"></b-form-select>
+            <b-form-group
+              id="input-group-intolerance"
+              label-cols-sm="3"
+              label="Intolerance:"
+              label-for="intolerance"
+            >
+              <b-form-select
+                id="intolerance"
+                :options="intolerances"
+                v-model="form.intolerance"
+              ></b-form-select>
             </b-form-group>
             <br />
           </b-form>
-
-
 
           <b-button href="#" variant="primary" @click="searchClick">
-            Search</b-button>
+            Search</b-button
+          >
           <div v-if="trigger > 0">
             <br />
-            <RecipePreviewList title="Search results" :trigger="trigger" :searchQuery="searchText"
-              :amount="recipeAmount" :cuisine="form.cuisine" :diet="form.diet" :intolerance="form.intolerance" />
+            <RecipePreviewList
+              title="Search results"
+              :trigger="trigger"
+              :searchQuery="searchText"
+              :amount="recipeAmount"
+              :cuisine="form.cuisine"
+              :diet="form.diet"
+              :intolerance="form.intolerance"
+            />
           </div>
         </div>
       </div>
@@ -103,8 +136,8 @@ export default {
       validated: false,
     };
   },
-  async created(){
-      this.getLastSearched()
+  async created() {
+    this.getLastSearched();
   },
   mounted() {
     // console.log("mounted");
@@ -120,27 +153,27 @@ export default {
     },
     searchClick() {
       this.trigger += 1;
-      this.getLastSearched() // Trigger the last seen.
+      this.getLastSearched(); // Trigger the last seen.
       console.log(this.searchText);
     },
     switchAmount(amount) {
       this.recipeAmount = amount;
     },
-    async getLastSearched(){
-      let response
-          try {
+    async getLastSearched() {
+      let response;
+      try {
         console.log("http://localhost:3000/users/getLastSearched");
         response = await this.axios.get(
           "http://localhost:3000/users/getLastSearched",
           1
         );
-        console.log("Last seen is:")
+        console.log("Last seen is:");
         console.log(response);
-        this.lastSearched = response.data
-        } catch (error) {
-          console.log(error)
-        }
-    }
+        this.lastSearched = response.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 </script>
