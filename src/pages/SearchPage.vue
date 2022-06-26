@@ -54,7 +54,6 @@
                 v-model="form.cuisine"
               ></b-form-select>
             </b-form-group>
-            <br />
           </b-form>
           <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
             <b-form-group
@@ -85,17 +84,22 @@
             </b-form-group>
             <br />
           </b-form>
-  
-          <b-button href="#" variant="primary" @click="searchClick">
-            Search</b-button
-          >
+          <div>
+            <b-button href="#" variant="sub" @click="sortByVar('likes')">
+              Sort by likes</b-button
+            >
+            <b-button href="#" variant="sub" @click="sortByVar('length')">
+              Sort By length</b-button
+            >
+          </div>
 
-          <b-button href="#" variant="primary" @click="sortByVar('likes')">
-            Sort by likes</b-button
-          >
-          <b-button href="#" variant="primary" @click="sortByVar('length')">
-            Sort By length</b-button
-          >
+          <div>
+            <br />
+            <b-button href="#" variant="primary" @click="searchClick">
+              Search</b-button
+            >
+          </div>
+
           <div v-if="trigger > 0">
             <br />
             <RecipePreviewList
@@ -106,7 +110,7 @@
               :cuisine="form.cuisine"
               :diet="form.diet"
               :intolerance="form.intolerance"
-              :sort = "sortBy"
+              :sort="sortBy"
             />
           </div>
         </div>
@@ -132,7 +136,7 @@ export default {
       searchText: "",
       recipeAmount: 5,
       lastSearched: "",
-      sortBy : "",
+      sortBy: "",
       form: {
         cuisine: "",
         diet: "",
@@ -168,15 +172,17 @@ export default {
     switchAmount(amount) {
       this.recipeAmount = amount;
     },
-    sortByVar(type){
-      if (type == "likes"){
-        this.sortBy = "aggregateLikes"
+    sortByVar(type) {
+      if (type == "likes") {
+        this.sortBy = "aggregateLikes";
+      } else if (type == "length") {
+        this.sortBy = "readyInMinutes";
       }
-      else if (type == "length"){
-        this.sortBy = "readyInMinutes"
+      console.log("sort by " + type);
+      if (this.trigger > 0){
+          this.trigger += 1;
       }
-      console.log("sort by " + type)
-      this.trigger += 1;
+      
     },
     async getLastSearched() {
       let response;
@@ -223,9 +229,34 @@ export default {
     font-size: 34px;
   }
 
+  .btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    margin: 10px;
+  }
+
+  .btn-sub {
+    color: #fff;
+    background-color: #363a3e;
+    border-color: #363a3e;
+    margin: 10px;
+  }
   .search-bar {
     .form-holder {
       position: relative;
+    }
+
+    .form-row {
+      display: flex;
+      margin-right: -5px;
+      margin-left: -5px;
+      flex-direction: row;
+      align-content: flex-start;
+      justify-content: flex-start;
+      align-items: center;
+      flex-wrap: nowrap;
+      flex-direction: column
     }
 
     .form-control {
@@ -272,6 +303,26 @@ export default {
       opacity: 0.5;
       z-index: 2;
       transition: all 0.2s linear;
+    }
+
+    .custom-select {
+      display: inline-block;
+      width: 10%;
+      height: calc(1.5em + 0.75rem + 2px);
+      padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #495057;
+      vertical-align: middle;
+      background: #fff
+        url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e")
+        no-repeat right 0.75rem center/8px 10px;
+      border: 1px solid #ced4da;
+      border-radius: 0.1rem;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
     }
   }
 }
