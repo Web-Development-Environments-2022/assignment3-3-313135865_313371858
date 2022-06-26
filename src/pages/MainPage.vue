@@ -1,35 +1,36 @@
 <template>
-
   <div class="container">
     <h1 class="title">Main Page</h1>
-    <div id="left">
-    <RecipePreviewList title="Random Recipes" class="RandomRecipes center" />
-</div>
+    <div id="right">
+      <RecipePreviewList title="Random Recipes" class="RandomRecipes center" />
+    </div>
 
-<div id="right">
-  
-    <RecipePreviewList
-      title="Last Viewed Recipes"
-      :class="{
-        RandomRecipes: true,
-        blur: !$root.store.username,
-        center: true
-      }"
-      disabled
-    ></RecipePreviewList> 
+    <div id="left">
+      <RecipePreviewList
+        v-if="$root.store.username"
+        title="Last Viewed Recipes"
+        :class="{
+          RandomRecipes: true,
+          center: true,
+        }"
+        disabled
+      >
+      </RecipePreviewList>
+      <Welcome v-else> </Welcome>
     </div>
     <div
       style="position: absolute;top: 70%;left: 50%;transform: translate(-50%, -50%);"
-    >
-    </div>
+    ></div>
   </div>
 </template>
 
 <script>
 import RecipePreviewList from "../components/RecipePreviewList";
+import Welcome from "../components/Welcome.vue";
 export default {
   components: {
     RecipePreviewList,
+    Welcome,
   },
 };
 </script>
@@ -47,10 +48,15 @@ export default {
   cursor: default;
 }
 
-#container{width:100%;}
-#left{float:left;width:500px;}
-#right{float:right;width:500px;}
-
-
+#container {
+  width: 100%;
+}
+#left {
+  float: left;
+  width: 500px;
+}
+#right {
+  float: right;
+  width: 500px;
+}
 </style>
-

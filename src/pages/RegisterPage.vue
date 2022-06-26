@@ -159,6 +159,9 @@
       </b-form-group>
 
       <b-button type="reset" variant="danger">Reset</b-button>
+      <br>
+
+      <br>
       <b-button
         type="submit"
         variant="primary"

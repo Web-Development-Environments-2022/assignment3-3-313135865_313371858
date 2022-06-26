@@ -2,26 +2,35 @@
   <div class="container">
     <h1 class="title">About us</h1>
     <div class="logo">
-      <img src="../assets/logo.png" class="logo" />
+      <img src="../assets/Tamar.png" width="100px" class="logo" />
+      &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;
+      <img src="../assets/Jonathan.png" width="90px" class="logo" />
     </div>
-    This website made by Jonathan and Tamar.<br>
-    We used J QUERY to implement the registration and login using validator template<br>
-    The difficulties we encountered:<br>
-    <li>The work consists of many small and important tasks that each depend on the other. Our ambition was to create
-      the bulk of the required functionality and in the next step to add design.</li>
-    <li>Functionality of wind movement. </li>
-    <li>Failure to eat a score for some of the characters. </li>
+    This website made by Jonathan Pelah and Tamar Shaiman.<br />
+    The website was built using Node.js JavaScript runtime environment and
+    Vue.js JavaScript framework.
 
+    <br />
+    <br />
+    <br />
+
+    We used J QUERY to implement the registration and login using validator
+    template<br />
+    The difficulties we encountered:<br />
+    <li>
+      The work consists of many small and important tasks that each depend on
+      the other. Our ambition was to create the bulk of the required
+      functionality and in the next step to add design.
+    </li>
+    <li>Functionality of wind movement.</li>
+    <li>Failure to eat a score for some of the characters.</li>
   </div>
-
 </template>
 
 <script>
-
 export default {
-  components: {
-
-  },
+  components: {},
 };
 </script>
 

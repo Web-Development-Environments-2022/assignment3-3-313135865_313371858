@@ -197,6 +197,7 @@ export default {
 .card-body {
   flex: 1 1 auto;
   min-height: 1px;
+  max-height: 166px;
   width: 300px;
   padding: 1.25rem;
 }

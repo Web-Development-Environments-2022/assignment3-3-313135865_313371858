@@ -35,73 +35,79 @@
           </div>
           <div>
             <br />
-            <b-dropdown text="amount">
-              <b-dropdown-item @click="switchAmount(5)">5</b-dropdown-item>
-              <b-dropdown-item @click="switchAmount(10)">10</b-dropdown-item>
-              <b-dropdown-item @click="switchAmount(15)">15</b-dropdown-item>
-            </b-dropdown>
-          </div>
-          <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
-            <b-form-group
-              id="input-group-cuisine"
-              label-cols-sm="3"
-              label="Cuisine:"
-              label-for="cuisine"
-            >
-              <b-form-select
-                id="cuisine"
-                :options="cuisines"
-                v-model="form.cuisine"
-              ></b-form-select>
-            </b-form-group>
-          </b-form>
-          <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
-            <b-form-group
-              id="input-group-diet"
-              label-cols-sm="3"
-              label="Diet:"
-              label-for="diet"
-            >
-              <b-form-select
-                id="diet"
-                :options="diets"
-                v-model="form.diet"
-              ></b-form-select>
-            </b-form-group>
-          </b-form>
-          <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
-            <b-form-group
-              id="input-group-intolerance"
-              label-cols-sm="3"
-              label="Intolerance:"
-              label-for="intolerance"
-            >
-              <b-form-select
-                id="intolerance"
-                :options="intolerances"
-                v-model="form.intolerance"
-              ></b-form-select>
-            </b-form-group>
-            <br />
-          </b-form>
-          <div>
+
             <b-button href="#" variant="sub" @click="sortByVar('likes')">
               Sort by likes</b-button
             >
             <b-button href="#" variant="sub" @click="sortByVar('length')">
               Sort By length</b-button
             >
+
+            <b-dropdown text="Amount of results" variant="sub">
+              <b-dropdown-item @click="switchAmount(5)">5</b-dropdown-item>
+              <b-dropdown-item @click="switchAmount(10)">10</b-dropdown-item>
+              <b-dropdown-item @click="switchAmount(15)">15</b-dropdown-item>
+            </b-dropdown>
           </div>
+          <form class="form-inline">
+            <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
+              <b-form-group
+                id="input-group-cuisine"
+                label-cols-sm="3"
+                label="Cuisine"
+                label-for="cuisine"
+              >
+                <b-form-select
+                  id="cuisine"
+                  :options="cuisines"
+                  v-model="form.cuisine"
+                ></b-form-select>
+              </b-form-group>
+            </b-form>
+            <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
+              <b-form-group
+                id="input-group-diet"
+                label-cols-sm="3"
+                label="Diet"
+                label-for="diet"
+              >
+                <b-form-select
+                  id="diet"
+                  :options="diets"
+                  v-model="form.diet"
+                ></b-form-select>
+              </b-form-group>
+            </b-form>
+            <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
+              <b-form-group
+                id="input-group-intolerance"
+                label-cols-sm="3"
+                label="Intolerance"
+                label-for="intolerance"
+              >
+                <b-form-select
+                  id="intolerance"
+                  :options="intolerances"
+                  v-model="form.intolerance"
+                ></b-form-select>
+              </b-form-group>
+            </b-form>
+          </form>
 
           <div>
             <br />
-            <b-button href="#" variant="primary" @click="searchClick">
+            <b-button
+              href="#"
+              variant="primary"
+              @click="searchClick"
+              style="width:100px;display:block;"
+              class="mx-auto w-50"
+            >
               Search</b-button
             >
           </div>
 
           <div v-if="trigger > 0">
-            <br />
             <RecipePreviewList
               title="Search results"
               :trigger="trigger"
@@ -179,10 +185,9 @@ export default {
         this.sortBy = "readyInMinutes";
       }
       console.log("sort by " + type);
-      if (this.trigger > 0){
-          this.trigger += 1;
+      if (this.trigger > 0) {
+        this.trigger += 1;
       }
-      
     },
     async getLastSearched() {
       let response;
@@ -256,7 +261,7 @@ export default {
       justify-content: flex-start;
       align-items: center;
       flex-wrap: nowrap;
-      flex-direction: column
+      flex-direction: column;
     }
 
     .form-control {
@@ -307,7 +312,7 @@ export default {
 
     .custom-select {
       display: inline-block;
-      width: 10%;
+      width: 80%;
       height: calc(1.5em + 0.75rem + 2px);
       padding: 0.375rem 1.75rem 0.375rem 0.75rem;
       font-size: 1rem;
@@ -323,6 +328,14 @@ export default {
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
+    }
+
+    .form-inline {
+      display: flex;
+      flex-flow: row wrap;
+      align-items: center;
+      flex-direction: row;
+      justify-content: center;
     }
   }
 }
