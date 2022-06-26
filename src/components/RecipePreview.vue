@@ -18,54 +18,89 @@
   </router-link> -->
 
   <div>
-    <b-card
-      :img-src="recipe.image"
-      img-width="250px"
-      img-alt="Card image"
-      img-left
-      class="mb-3"
+    <router-link
+      v-if="!recipe.user_id"
+      :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
+      class="recipe-preview"
+      tag="li"
     >
-      <b-card-text>
-        A great recipe! the duration is {{ recipe.readyInMinutes }} minutes and
-        the {{ recipe.aggregateLikes }} likes
-      </b-card-text>
-
-      <router-link
-        v-if="!recipe.user_id"
-        :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
-        class="recipe-preview"
+      <b-card
+        :img-src="recipe.image"
+        img-width="250px"
+        img-alt="Card image"
+        img-left
+        class="mb-3"
       >
-        <b-button variant="primary">View recipe</b-button>
-      </router-link>
+        <h5>
+          {{ recipe.title }}
+        </h5>
+        <b-card-text>
+          The duration is {{ recipe.readyInMinutes }} minutes.
+          {{ recipe.aggregateLikes }} likes
+        </b-card-text>
+      </b-card>
+    </router-link>
 
-      <router-link
-        v-else-if="!recipe.recipe_owner"
-        :to="{
-          name: 'dbrecipes',
-          params: { recipeId: recipe.id, recipeType: 'Personal' },
-        }"
-        class="recipe-preview"
+      
+    <router-link
+      v-else-if="!recipe.recipe_owner"
+      :to="{ name: 'dbrecipes', params: { recipeId: recipe.id, recipeType: 'Personal'  } }"
+      class="recipe-preview"
+      tag="li"
+    >
+      <b-card
+        :img-src="recipe.image"
+        img-width="250px"
+        img-alt="Card image"
+        img-left
+        class="mb-3"
       >
-        <b-button variant="primary">View recipe</b-button>
-      </router-link>
+        <h5>
+          {{ recipe.title }}
+        </h5>
+        <b-card-text>
+          The duration is {{ recipe.readyInMinutes }} minutes.
+          {{ recipe.aggregateLikes }} likes
+        </b-card-text>
+      </b-card>
+    </router-link>
 
-      <router-link
-        v-else
-        :to="{
-          name: 'dbrecipes',
-          params: { recipeId: recipe.id, recipeType: 'Family' },
-        }"
-        class="recipe-preview"
+
+     
+    <router-link
+     v-else
+      :to="{ name: 'dbrecipes', params: { recipeId: recipe.id,recipeType: 'Family' } }"
+      class="recipe-preview"
+      tag="li"
+    >
+      <b-card
+        :img-src="recipe.image"
+        img-width="250px"
+        img-alt="Card image"
+        img-left
+        class="mb-3"
       >
-        <b-button variant="primary">View recipe</b-button>
-      </router-link>
-    </b-card>
-  </div>
+        <h5>
+          {{ recipe.title }}
+        </h5>
+        <b-card-text>
+          The duration is {{ recipe.readyInMinutes }} minutes.
+          {{ recipe.aggregateLikes }} likes
+        </b-card-text>
+      </b-card>
+    </router-link>
+    </div>
+
+
 </template>
 
 <script>
 export default {
-  mounted() {
+  created() {
+    if (typeof this.recipe.image === "undefined") {
+      this.recipe.image =
+        "https://image.shutterstock.com/image-photo/blank-vintage-recipe-cooking-book-600w-504504346.jpg";
+    }
     this.axios.get(this.recipe.image).then((i) => {
       this.image_load = true;
     });
@@ -158,5 +193,11 @@ export default {
   width: 90px;
   display: table-cell;
   text-align: center;
+}
+.card-body {
+  flex: 1 1 auto;
+  min-height: 1px;
+  width: 300px;
+  padding: 1.25rem;
 }
 </style>
