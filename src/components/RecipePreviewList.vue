@@ -59,6 +59,11 @@ export default {
       type: String,
       required: false,
     },
+    sort: {
+      type:String,
+      required : false
+    },
+
   },
   watch: {
     trigger: function() {
@@ -84,6 +89,7 @@ export default {
   methods: {
     async updateRecipes() {
       this.no_results = false;
+      this.loading = true;
       try {
         if (this.title == "Random Recipes") {
           // Random recipes.
@@ -138,7 +144,9 @@ export default {
           "&diet=" +
           this.diet +
           "&intolerance=" +
-          this.intolerance,
+          this.intolerance +
+          "&sort=" +
+          this.sort,
         { withCredentials: true }
       );
       response = await this.axios.get(
@@ -152,7 +160,9 @@ export default {
           "&diet=" +
           this.diet +
           "&intolerance=" +
-          this.intolerance,
+          this.intolerance +
+          "&sort=" +
+          this.sort,
         { withCredentials: true }
       );
       recipes = response.data;
@@ -164,7 +174,8 @@ export default {
         console.log(response);
         this.recipes = [];
         this.recipes.push(...recipes);
-        console.log(this.recipes);
+        console.log(this.recipes)
+
       }
     },
     async favoriteRecipes() {
@@ -227,7 +238,7 @@ export default {
       this.recipes = [];
       this.recipes.push(...recipes);
       console.log(this.recipes);
-    },
+    }
   },
 };
 </script>

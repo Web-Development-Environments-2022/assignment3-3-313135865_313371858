@@ -85,9 +85,16 @@
             </b-form-group>
             <br />
           </b-form>
-
+  
           <b-button href="#" variant="primary" @click="searchClick">
             Search</b-button
+          >
+
+          <b-button href="#" variant="primary" @click="sortByVar('likes')">
+            Sort by likes</b-button
+          >
+          <b-button href="#" variant="primary" @click="sortByVar('length')">
+            Sort By length</b-button
           >
           <div v-if="trigger > 0">
             <br />
@@ -99,6 +106,7 @@
               :cuisine="form.cuisine"
               :diet="form.diet"
               :intolerance="form.intolerance"
+              :sort = "sortBy"
             />
           </div>
         </div>
@@ -124,6 +132,7 @@ export default {
       searchText: "",
       recipeAmount: 5,
       lastSearched: "",
+      sortBy : "",
       form: {
         cuisine: "",
         diet: "",
@@ -158,6 +167,16 @@ export default {
     },
     switchAmount(amount) {
       this.recipeAmount = amount;
+    },
+    sortByVar(type){
+      if (type == "likes"){
+        this.sortBy = "aggregateLikes"
+      }
+      else if (type == "length"){
+        this.sortBy = "readyInMinutes"
+      }
+      console.log("sort by " + type)
+      this.trigger += 1;
     },
     async getLastSearched() {
       let response;
