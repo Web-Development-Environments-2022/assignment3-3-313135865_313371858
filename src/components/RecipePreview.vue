@@ -128,7 +128,7 @@ export default {
 }
 
 .seen{ 
-   filter: brightness(80%) ; 
+   filter: brightness(90%) ; 
  }
 
  .no_seen{

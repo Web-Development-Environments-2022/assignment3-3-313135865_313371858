@@ -36,10 +36,18 @@
           <div>
             <br />
 
-            <b-button href="#" variant="sub" @click="sortByVar('likes')">
+            <b-button
+              href="#"
+              :variant="this.likes_sub"
+              @click="sortByVar('likes')"
+            >
               Sort by likes</b-button
             >
-            <b-button href="#" variant="sub" @click="sortByVar('length')">
+            <b-button
+              href="#"
+              :variant="this.length_sub"
+              @click="sortByVar('length')"
+            >
               Sort By length</b-button
             >
 
@@ -153,6 +161,8 @@ export default {
       intolerances: [{ value: null, text: "", disabled: true }],
       errors: [],
       validated: false,
+      likes_sub: "sub",
+      length_sub: "sub",
     };
   },
   async created() {
@@ -180,9 +190,23 @@ export default {
     },
     sortByVar(type) {
       if (type == "likes") {
-        this.sortBy = "aggregateLikes";
+        if ((this.sortBy == "aggregateLikes")) {
+          this.sortBy = "";
+          this.likes_sub = "sub";
+        } else {
+          this.sortBy = "aggregateLikes";
+          this.likes_sub = "pointed";
+          this.length_sub = "sub";
+        }
       } else if (type == "length") {
-        this.sortBy = "readyInMinutes";
+        if ((this.sortBy == "readyInMinutes")) {
+          this.sortBy = "";
+          this.length_sub = "sub";
+        } else {
+          this.sortBy = "readyInMinutes";
+          this.length_sub = "pointed";
+          this.likes_sub = "sub";
+        }
       }
       console.log("sort by " + type);
       if (this.trigger > 0) {
@@ -245,6 +269,13 @@ export default {
     color: #fff;
     background-color: #363a3e;
     border-color: #363a3e;
+    margin: 10px;
+  }
+
+  .btn-pointed {
+    color: #fff;
+    background-color: #25de84;
+    border-color: #25de84;
     margin: 10px;
   }
   .search-bar {
