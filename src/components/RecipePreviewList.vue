@@ -116,9 +116,9 @@ export default {
     async randomRecipes() {
       let response;
       let recipes;
-      console.log("http://localhost:3000" + "/recipes/random");
+      console.log(this.$root.store.server_domain + "/recipes/random");
       response = await this.axios.get(
-        "http://localhost:3000" + "/recipes/random",
+        this.$root.store.server_domain + "/recipes/random",
         { withCredentials: true }
         //this.$root.store.server_domain
       );
@@ -134,7 +134,7 @@ export default {
       let response;
       let recipes;
       console.log(
-        "http://localhost:3000" +
+        this.$root.store.server_domain +
           "/recipes/search?searchQuery=" +
           this.searchQuery +
           "&amount=" +
@@ -150,7 +150,7 @@ export default {
         { withCredentials: true }
       );
       response = await this.axios.get(
-        "http://localhost:3000" +
+        this.$root.store.server_domain +
           "/recipes/search?searchQuery=" +
           this.searchQuery +
           "&amount=" +
@@ -181,8 +181,8 @@ export default {
     async favoriteRecipes() {
       let response;
       let recipes;
-      console.log("http://localhost:3000/users/favorites");
-      response = await this.axios.get("http://localhost:3000/users/favorites", {
+      console.log(this.$root.store.server_domain + "/users/favorites");
+      response = await this.axios.get(this.$root.store.server_domain + "/users/favorites", {
         withCredentials: true,
       });
 
@@ -195,10 +195,11 @@ export default {
     async personalRecipes() {
       let response;
       let recipes;
-      console.log("http://localhost:3000/users/personalRecipe");
+      console.log(this.$root.store.server_domain +
+       "/users/personalRecipe");
 
       response = await this.axios.get(
-        "http://localhost:3000/users/personalRecipe",
+        this.$root.store.server_domain + "/users/personalRecipe",
         { withCredentials: true }
       );
 
@@ -211,9 +212,9 @@ export default {
     async familyRecipes() {
       let response;
       let recipes;
-      console.log("http://localhost:3000/users/familyRecipes");
+      console.log(this.$root.store.server_domain + "/users/familyRecipes");
       response = await this.axios.get(
-        "http://localhost:3000/users/familyRecipes",
+        this.$root.store.server_domain + "/users/familyRecipes",
         { withCredentials: true }
       );
 
@@ -226,10 +227,10 @@ export default {
     async lastViewedRecipes() {
       let response;
       let recipes;
-      console.log("http://localhost:3000/users/getLastSeen");
+      console.log(this.$root.store.server_domain + "/users/getLastSeen");
 
       response = await this.axios.get(
-        "http://localhost:3000/users/getLastSeen",
+        this.$root.store.server_domain + "/users/getLastSeen",
         { withCredentials: true }
       );
 

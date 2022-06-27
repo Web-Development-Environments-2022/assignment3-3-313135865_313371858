@@ -190,7 +190,7 @@ export default {
     },
     sortByVar(type) {
       if (type == "likes") {
-        if ((this.sortBy == "aggregateLikes")) {
+        if (this.sortBy == "aggregateLikes") {
           this.sortBy = "";
           this.likes_sub = "sub";
         } else {
@@ -199,7 +199,7 @@ export default {
           this.length_sub = "sub";
         }
       } else if (type == "length") {
-        if ((this.sortBy == "readyInMinutes")) {
+        if (this.sortBy == "readyInMinutes") {
           this.sortBy = "";
           this.length_sub = "sub";
         } else {
@@ -216,9 +216,9 @@ export default {
     async getLastSearched() {
       let response;
       try {
-        console.log("http://localhost:3000/users/getLastSearched");
+        console.log(this.$root.store.server_domain + "/users/getLastSearched");
         response = await this.axios.get(
-          "http://localhost:3000/users/getLastSearched",
+          this.$root.store.server_domain + "/users/getLastSearched",
           1
         );
         console.log("Last seen is:");

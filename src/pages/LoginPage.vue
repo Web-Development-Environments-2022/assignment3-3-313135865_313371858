@@ -94,20 +94,12 @@ export default {
     async Login() {
       try {
         const response = await this.axios.post(
-          //TODO: need to change to the domain name and the address
-
-          "http://localhost:3000" + "/Login",
-          // this.$root.store.server_domain +"/Login",
-          // "http://132.72.65.211:80/Login",
-          // "http://132.73.84.100:80/Login",
-
+         this.$root.store.server_domain + "/Login",
           {
             username: this.form.username,
             password: this.form.password,
           }
         );
-        // console.log(response);
-        // this.$root.loggedIn = true;
         console.log(this.$root.store.login);
         this.$root.store.login(this.form.username);
         this.$router.push("/");

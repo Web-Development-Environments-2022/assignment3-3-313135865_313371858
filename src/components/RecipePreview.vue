@@ -96,8 +96,8 @@ export default {
       this.image_load = true;
     });
     let response;
-    console.log("http://localhost:3000/users/getHasSeen?recipeId="+this.recipe.id);
-    response = await this.axios.get("http://localhost:3000/users/getHasSeen?recipeId="+this.recipe.id, {
+    console.log(this.$root.store.server_domain + "/users/getHasSeen?recipeId="+this.recipe.id);
+    response = await this.axios.get(this.$root.store.server_domain + "/users/getHasSeen?recipeId="+this.recipe.id, {
       withCredentials: true,
     });
     if (response.data == true){

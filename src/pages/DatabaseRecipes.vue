@@ -38,9 +38,9 @@ export default {
     let response;
     if (this.$route.params.recipeType == "Personal") {
       try {
-        console.log("http://localhost:3000/users/personalRecipe");
+        console.log(this.$root.store.server_domain + "/users/personalRecipe");
         response = await this.axios.get(
-          "http://localhost:3000/users/personalRecipe",
+          this.$root.store.server_domain + "/users/personalRecipe",
           { withCredentials: true }
         );
         console.log(response);
@@ -51,9 +51,9 @@ export default {
       }
     } else if (this.$route.params.recipeType == "Family") {
       try {
-        console.log("http://localhost:3000/users/familyRecipes");
+        console.log(this.$root.store.server_domain + "/users/familyRecipes");
         response = await this.axios.get(
-          "http://localhost:3000/users/familyRecipes",
+          this.$root.store.server_domain + "/users/familyRecipes",
           { withCredentials: true }
         );
         console.log(response);

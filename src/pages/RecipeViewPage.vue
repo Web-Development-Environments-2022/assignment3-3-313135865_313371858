@@ -67,11 +67,11 @@ export default {
 
       try {
         console.log(
-          "http://localhost:3000/recipes/recipeFullDetails?recipeId=" +
+         this.$root.store.server_domain + "/recipes/recipeFullDetails?recipeId=" +
             this.$route.params.recipeId
         );
         response = await this.axios.get(
-          "http://localhost:3000/recipes/recipeFullDetails?recipeId=" +
+          this.$root.store.server_domain + "/recipes/recipeFullDetails?recipeId=" +
             this.$route.params.recipeId,
           { withCredentials: true }
         );
@@ -130,9 +130,10 @@ export default {
       let response;
       const recipe = { recipeId: this.$route.params.recipeId };
       console.log(recipe);
-      console.log("http://localhost:3000/users/favorites");
+      console.log(this.$root.store.server_domain + "/users/favorites");
       response = await this.axios.post(
-        "http://localhost:3000/users/favorites",
+        this.$root.store.server_domain 
+        + "/users/favorites",
         recipe,
         {
           withCredentials: true,
@@ -145,11 +146,11 @@ export default {
       let response;
       const recipe = { recipeId: this.$route.params.recipeId };
       console.log(
-        "http://localhost:3000/users/existInFavorites?recipeId=" +
+        this.$root.store.server_domain + "/users/existInFavorites?recipeId=" +
           this.$route.params.recipeId
       );
       response = await this.axios.get(
-        "http://localhost:3000/users/existInFavorites?recipeId=" +
+        this.$root.store.server_domain + "/users/existInFavorites?recipeId=" +
           this.$route.params.recipeId,
         {
           withCredentials: true,
@@ -164,9 +165,9 @@ export default {
     async removeFromFavorites() {
       let response;
       const recipe = { recipeId: this.$route.params.recipeId };
-      console.log("http://localhost:3000/users/removeFromFavorites");
+      console.log(this.$root.store.server_domain + "/users/removeFromFavorites");
       response = await this.axios.post(
-        "http://localhost:3000/users/removeFromFavorites",
+       this.$root.store.server_domain + "/users/removeFromFavorites",
         recipe,
         {
           withCredentials: true,
