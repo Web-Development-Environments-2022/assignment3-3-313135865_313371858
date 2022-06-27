@@ -1,16 +1,15 @@
 <template>
   <div>
     <h3>
-      Welcome to Cloud Recipe!
+      Welcome to Cloud Recipe
     </h3>
     <br />
     <h4>
-    Sign-up or Login to enjoy a variety of options such as saving recipes to favorites, creating personal and family lists and more.
+    Sign-up or Login to enjoy a variety of options such as saving recipes to favorites, creating personal and family lists and much more.
     <br>
     </h4>
     <br />
     <b-button href="#" @click="onLogIn" variant="primary"> Login</b-button>
-        
     <b-button href="#" @click="onRegister" variant="primary"> Sign-Up</b-button>
   </div>
 </template>

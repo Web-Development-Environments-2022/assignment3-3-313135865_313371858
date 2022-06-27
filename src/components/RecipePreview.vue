@@ -19,8 +19,14 @@
           {{ recipe.title }}
         </h5>
         <b-card-text>
-          The duration is {{ recipe.readyInMinutes }} minutes.
-          {{ recipe.aggregateLikes }} likes
+          <b-badge>Duration: {{recipe.readyInMinutes}} </b-badge>
+          &nbsp;
+          <b-badge>Likes:{{ recipe.aggregateLikes }}  </b-badge>
+          &nbsp;
+          <b-badge v-if="recipe.glutenFree" variant="primary">Gluten Free </b-badge>
+          &nbsp;
+          <b-badge v-if="recipe.dairyFree" variant="success">Dairy Free </b-badge>
+          
         </b-card-text>
       </b-card>
 
@@ -203,4 +209,5 @@ export default {
   width: 300px;
   padding: 1.25rem;
 }
+
 </style>
