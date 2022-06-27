@@ -3,6 +3,16 @@
     <div v-if="recipe">
       <div class="recipe-header mt-3 mb-4">
         <h1>{{ recipe.title }}</h1>
+        <div v-if="!this.favorite">
+          <b-button href="#" @click="addToFavorites()" variant="primary">
+            Add to favorites</b-button
+          >
+        </div>
+        <div v-else>
+          <b-button href="#" @click="removeFromFavorites()" variant="sub">
+            Remove from favorites</b-button
+          >
+        </div>
         <img :src="recipe.image" class="center" />
       </div>
       <div class="recipe-body">
@@ -43,12 +53,13 @@
 
 <script>
 export default {
+  components: {},
   data() {
     return {
       recipe: null,
+      favorite: false,
     };
   },
-
   async created() {
     try {
       let response;
@@ -61,7 +72,8 @@ export default {
         );
         response = await this.axios.get(
           "http://localhost:3000/recipes/recipeFullDetails?recipeId=" +
-            this.$route.params.recipeId,{withCredentials: true}
+            this.$route.params.recipeId,
+          { withCredentials: true }
         );
         // "https://test-for-3-2.herokuapp.com/recipes/info",
 
@@ -112,6 +124,11 @@ export default {
       console.log(error);
     }
   },
+  methods: {
+    addToFavorites() {
+      this.favorite = true;
+    },
+  },
 };
 </script>
 
@@ -127,6 +144,20 @@ export default {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #007bff;
+  border-color: #007bff;
+  margin: 10px;
+}
+
+.btn-sub {
+  color: #fff;
+  background-color: #363a3e;
+  border-color: #363a3e;
+  margin: 10px;
 }
 /* .recipe-header{
 

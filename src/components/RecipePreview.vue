@@ -1,23 +1,7 @@
 <template>
-  <!-- <router-link
-    :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
-    class="recipe-preview"
-  >
-    <div class="recipe-body">
-      <img v-if="image_load" :src="recipe.image" class="recipe-image" />
-    </div>
-    <div class="recipe-footer">
-      <div :title="recipe.title" class="recipe-title">
-        {{ recipe.title }}
-      </div>
-      <ul class="recipe-overview">
-        <li>{{ recipe.readyInMinutes }} minutes</li>
-        <li>{{ recipe.aggregateLikes }} likes</li>
-      </ul>
-    </div>
-  </router-link> -->
 
   <div>
+      <div :class = "seen">
     <router-link
       v-if="!recipe.user_id"
       :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
@@ -39,6 +23,7 @@
           {{ recipe.aggregateLikes }} likes
         </b-card-text>
       </b-card>
+
     </router-link>
 
       
@@ -90,13 +75,13 @@
       </b-card>
     </router-link>
     </div>
-
+</div>
 
 </template>
 
 <script>
 export default {
-  created() {
+  async created() {
     if (typeof this.recipe.image === "undefined") {
       this.recipe.image =
         "https://image.shutterstock.com/image-photo/blank-vintage-recipe-cooking-book-600w-504504346.jpg";
@@ -104,15 +89,25 @@ export default {
     this.axios.get(this.recipe.image).then((i) => {
       this.image_load = true;
     });
+    let response;
+    console.log("http://localhost:3000/users/getHasSeen?recipeId="+this.recipe.id);
+    response = await this.axios.get("http://localhost:3000/users/getHasSeen?recipeId="+this.recipe.id, {
+      withCredentials: true,
+    });
+    console.log(response.data == true)
+    if (response.data == true){
+      this.seen = "seen"
+    }
   },
   data() {
     return {
       image_load: false,
+      seen: "no_seen"
     };
   },
   props: {
     recipe: {
-      type: Object,
+      type: Object,       
       required: true,
     },
   },
@@ -132,6 +127,14 @@ export default {
   height: 200px;
   position: relative;
 }
+
+.seen{ 
+   filter: brightness(80%) ; 
+ }
+
+ .no_seen{
+
+ }
 
 .recipe-preview .recipe-body .recipe-image {
   margin-left: auto;

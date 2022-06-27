@@ -4,6 +4,10 @@ import VueAxios from "vue-axios";
 import axios from "axios";
 import routes from "./routes";
 import VueRouter from "vue-router";
+import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
+
+Vue.use(BootstrapVue)
+Vue.use(BootstrapVueIcons)
 
 axios.defaults.withCredentials = true;
 Vue.use(VueRouter);

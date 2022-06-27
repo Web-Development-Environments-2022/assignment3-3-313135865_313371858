@@ -16,6 +16,7 @@
         disabled
       >
       </RecipePreviewList>
+      
       <Welcome v-else> </Welcome>
     </div>
     <div
