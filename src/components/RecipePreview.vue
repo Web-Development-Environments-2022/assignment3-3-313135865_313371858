@@ -94,7 +94,6 @@ export default {
     response = await this.axios.get("http://localhost:3000/users/getHasSeen?recipeId="+this.recipe.id, {
       withCredentials: true,
     });
-    console.log(response.data == true)
     if (response.data == true){
       this.seen = "seen"
     }

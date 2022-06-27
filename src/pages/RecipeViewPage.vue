@@ -120,13 +120,60 @@ export default {
       };
 
       this.recipe = _recipe;
+      this.checkIfFavorite();
     } catch (error) {
       console.log(error);
     }
   },
   methods: {
-    addToFavorites() {
+    async addToFavorites() {
+      let response;
+      const recipe = { recipeId: this.$route.params.recipeId };
+      console.log(recipe);
+      console.log("http://localhost:3000/users/favorites");
+      response = await this.axios.post(
+        "http://localhost:3000/users/favorites",
+        recipe,
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(response);
       this.favorite = true;
+    },
+    async checkIfFavorite() {
+      let response;
+      const recipe = { recipeId: this.$route.params.recipeId };
+      console.log(
+        "http://localhost:3000/users/existInFavorites?recipeId=" +
+          this.$route.params.recipeId
+      );
+      response = await this.axios.get(
+        "http://localhost:3000/users/existInFavorites?recipeId=" +
+          this.$route.params.recipeId,
+        {
+          withCredentials: true,
+        }
+      );
+
+      if (response.data == true) {
+        this.favorite = true;
+      }
+      console.log(response);
+    },
+    async removeFromFavorites() {
+      let response;
+      const recipe = { recipeId: this.$route.params.recipeId };
+      console.log("http://localhost:3000/users/removeFromFavorites");
+      response = await this.axios.post(
+        "http://localhost:3000/users/removeFromFavorites",
+        recipe,
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(response);
+      this.favorite = false;
     },
   },
 };
