@@ -1,18 +1,21 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <div id="nav" class="a">
       <router-link :to="{ name: 'main' }">Main Page </router-link>|
       <router-link :to="{ name: 'search' }">Search </router-link>|
       <router-link :to="{ name: 'about' }">About Us </router-link>|
+
       <span v-if="!$root.store.username">
         <router-link :to="{ name: 'register' }">Register </router-link>|
         <router-link :to="{ name: 'login' }">Login </router-link>|
       </span>
+      
       <span v-else>
         <router-link :to="{ name: 'favorites' }">Favorite Recipes </router-link>|
         <router-link :to="{ name: 'personal' }">Personal Recipes </router-link>|
         <router-link :to="{ name: 'family' }">Family Recipes </router-link>|
-        <div id="right">
+        
+        <div id="right" class="b">
           Guest: {{ $root.store.username }}
           <button
             type="button"
@@ -24,6 +27,8 @@
           >
             Logout
           </button>
+           <Modal>
+        </Modal> 
         </div>
       </span>
     </div>
@@ -31,8 +36,16 @@
   </div>
 </template>
 
+
+
+
 <script>
+import Modal from "./components/Modal";
+
 export default {
+  components: {
+    Modal
+  },
   name: "App",
   methods: {
     async Logout() {
@@ -77,6 +90,14 @@ export default {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+div.a {
+  font-size: 23px;
+}
+
+div.a {
+  font-size: 20px;
 }
 
 #right {

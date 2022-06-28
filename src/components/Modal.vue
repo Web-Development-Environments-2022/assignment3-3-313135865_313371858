@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="inline" >
         <!-- Using value -->
-        <b-button v-b-modal="'my-modal'">Create a recipe</b-button>
+        <b-button v-b-modal="'my-modal'" variant="success" class="buttonCreate" >Create a recipe</b-button>
 
         <!-- The modal -->
         <b-modal id="my-modal" @ok="onRegister" @show="onReset" @hidden="onReset">Create Your Recipe !
@@ -82,7 +82,7 @@ import { BButton, BModal, VBModal, BFormCheckbox } from "bootstrap-vue";
 import { required,  alpha, numeric } from "vuelidate/lib/validators";
 
 export default {
-    name: "my-modal",
+    name: "modal",
     data() {
         return {
             form: {
@@ -191,6 +191,12 @@ export default {
 
 </script>
 
+
+<style>
+.buttonCreate{
+    width: 183px;
+}
+</style>
  <!-- let recipe_details = {
       image: req.body.image,
       title: req.body.title,

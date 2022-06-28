@@ -53,6 +53,11 @@ const routes = [
     component: () => import("./pages/About"),
   },
   {
+    path: "/modal",
+    name: "modal",
+    component: () => import("./components/Modal"),
+  },
+  {
     path: "*",
     name: "notFound",
     component: NotFound,

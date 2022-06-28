@@ -21,7 +21,7 @@
         <b-card-text>
           <b-badge>Duration: {{recipe.readyInMinutes}} </b-badge>
           &nbsp;
-          <b-badge>Likes:{{ recipe.aggregateLikes }}  </b-badge>
+          <b-badge>Likes: {{ recipe.aggregateLikes }}  </b-badge>
           &nbsp;
           <b-badge v-if="recipe.glutenFree" variant="primary">Gluten Free</b-badge>
           &nbsp;
@@ -52,8 +52,16 @@
           {{ recipe.title }}
         </h5>
         <b-card-text>
-          The duration is {{ recipe.readyInMinutes }} minutes.
-          {{ recipe.aggregateLikes }} likes
+          <b-badge>Duration: {{recipe.readyInMinutes}} </b-badge>
+          &nbsp;
+          <b-badge>Likes: 0  </b-badge>
+          &nbsp;
+          <b-badge v-if="recipe.glutenFree" variant="primary">Gluten Free</b-badge>
+          &nbsp;
+          <b-badge v-if="recipe.vegetarian" variant="success">Vegetarian</b-badge>
+          &nbsp;
+          <b-badge v-if="recipe.vegan" variant="info">Vegan</b-badge>
+          
         </b-card-text>
       </b-card>
     </router-link>
@@ -77,8 +85,16 @@
           {{ recipe.title }}
         </h5>
         <b-card-text>
-          The duration is {{ recipe.readyInMinutes }} minutes.
-          {{ recipe.aggregateLikes }} likes
+          <b-badge>Duration: {{recipe.readyInMinutes}} </b-badge>
+          &nbsp;
+          <b-badge>Likes: {{ recipe.aggregateLikes }}  </b-badge>
+          &nbsp;
+          <b-badge v-if="recipe.glutenFree" variant="primary">Gluten Free</b-badge>
+          &nbsp;
+          <b-badge v-if="recipe.vegetarian" variant="success">Vegetarian</b-badge>
+          &nbsp;
+          <b-badge v-if="recipe.vegan" variant="info">Vegan</b-badge>
+          
         </b-card-text>
       </b-card>
     </router-link>
