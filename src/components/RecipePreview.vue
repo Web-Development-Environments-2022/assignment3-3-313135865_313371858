@@ -23,9 +23,11 @@
           &nbsp;
           <b-badge>Likes:{{ recipe.aggregateLikes }}  </b-badge>
           &nbsp;
-          <b-badge v-if="recipe.glutenFree" variant="primary">Gluten Free </b-badge>
+          <b-badge v-if="recipe.glutenFree" variant="primary">Gluten Free</b-badge>
           &nbsp;
-          <b-badge v-if="recipe.dairyFree" variant="success">Dairy Free </b-badge>
+          <b-badge v-if="recipe.vegetarian" variant="success">Vegetarian</b-badge>
+          &nbsp;
+          <b-badge v-if="recipe.vegan" variant="info">Vegan</b-badge>
           
         </b-card-text>
       </b-card>

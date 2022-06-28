@@ -3,14 +3,12 @@
     <h3>
       Welcome to Cloud Recipe
     </h3>
-    <img src="../assets/welcome_logo.png" width="400px" class="logo" />
+    <img src="../assets/welcome_logo.png" width="485px" class="logo" />
     <br />
     <br />
     <h4>
-    Sign-up or Login to enjoy a variety of options such as saving recipes to favorites, creating personal and family lists and much more.
-    <br>
-    <br>
-    
+      Sign-up or Login to enjoy a variety of options such as saving recipes to
+      favorites, creating personal and family lists and much more.
     </h4>
     <br />
     <b-button href="#" @click="onLogIn" variant="primary"> Login</b-button>

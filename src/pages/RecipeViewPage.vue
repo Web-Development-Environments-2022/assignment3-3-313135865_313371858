@@ -3,6 +3,8 @@
     <div v-if="recipe">
       <div class="recipe-header mt-3 mb-4">
         <h1>{{ recipe.title }}</h1>
+
+        <div v-if="$root.store.username">
         <div v-if="!this.favorite">
           <b-button href="#" @click="addToFavorites()" variant="primary">
             Add to favorites</b-button
@@ -12,6 +14,7 @@
           <b-button href="#" @click="removeFromFavorites()" variant="sub">
             Remove from favorites</b-button
           >
+        </div>
         </div>
         <img :src="recipe.image" class="center" />
       </div>

@@ -81,6 +81,6 @@ export default {
 
 #right {
   float: right;
-  width: 500px;
+  width: 200px;
 }
 </style>
