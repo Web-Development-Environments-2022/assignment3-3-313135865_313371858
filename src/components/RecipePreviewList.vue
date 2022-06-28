@@ -91,7 +91,7 @@ export default {
       this.no_results = false;
       this.loading = true;
       try {
-        if (this.title == "Random Recipes") {
+        if (this.title == "Explore This Recipes") {
           // Random recipes.
          await this.randomRecipes();
         } else if (this.title == "Search results") {
@@ -103,7 +103,7 @@ export default {
           await this.personalRecipes();
         } else if (this.title == "Family Recipes") {
           await this.familyRecipes();
-        } else if (this.title == "Last Viewed Recipes") {
+        } else if (this.title == "Last Watched Recipes") {
           await this.lastViewedRecipes();
         }
          this.loading = false

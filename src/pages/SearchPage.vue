@@ -182,7 +182,7 @@ export default {
     },
     searchClick() {
       this.trigger += 1;
-      this.getLastSearched(); // Trigger the last seen.
+      this.lastSearched = this.searchText; // Trigger the last seen.
       console.log(this.searchText);
     },
     switchAmount(amount) {

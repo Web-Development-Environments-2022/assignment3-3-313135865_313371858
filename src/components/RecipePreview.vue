@@ -9,7 +9,7 @@
       >
         <b-card
           :img-src="recipe.image"
-          img-width="250px"
+          img-width="300px"
           img-alt="Card image"
           img-left
           class="mb-3"
@@ -59,7 +59,7 @@
       >
         <b-card
           :img-src="recipe.image"
-          img-width="250px"
+          img-width="300px"
           img-alt="Card image"
           img-left
           class="mb-3"
@@ -96,7 +96,7 @@
       >
         <b-card
           :img-src="recipe.image"
-          img-width="250px"
+          img-width="300px"
           img-alt="Card image"
           img-left
           class="mb-3"
@@ -313,7 +313,7 @@ export default {
 .card-body {
   flex: 1 1 auto;
   min-height: 1px;
-  max-height: 166px;
+  height: 200px;
   width: 300px;
   padding: 1.25rem;
 }

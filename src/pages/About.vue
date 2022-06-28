@@ -2,18 +2,26 @@
   <div class="container">
     <h1 class="title">About us</h1>
     <div class="logo">
-      <img src="../assets/Tamar.png" width="100px" class="logo" />
+      <img src="../assets/Tamar.png" width="150px" class="left" />
       &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
       &nbsp;&nbsp;&nbsp;
-      <img src="../assets/Jonathan.png" width="90px" class="logo" />
+      <img src="../assets/Jonathan.png" width="135px" class="right" />
     </div>
     This website made by Jonathan and Tamar.<br>
-    We used J QUERY to implement the registration and login using validator template<br>
-    The difficulties we encountered:<br>
-    <li>The work consists of many small and important tasks that each depend on the other. Our ambition was to create
-      the bulk of the required functionality and in the next step to add design.</li>
-    <li>Functionality of wind movement. </li>
-    <li>Failure to eat a score for some of the characters. </li>
+    We are two 3rd year students at Software & Information System Engineering departure in Ben Gurion University.
+    <br>
+    The website was built using Node.js JavaScript runtime environment and
+    Vue.js JavaScript framework.
+    <br>
+    Here's a link to the Swagger API'S documentation:
+      <a href="https://app.swaggerhub.com/apis-docs/JonathanP-Git/API/1.0.0">Link to Swagger.</a>
+    <br>
+    We have another project, a Javascript Pacman game:
+    <a href="https://web-development-environments-2022.github.io/assignment2-313371858_313135865/">Link to the game.</a>
+    
+
+
   </div>
  
 </template>
@@ -39,5 +47,14 @@ export default {
 ::v-deep .blur .recipe-preview {
   pointer-events: none;
   cursor: default;
+}
+
+#left {
+  float: left;
+  width: 500px;
+}
+#right {
+  float: right;
+  width: 500px;
 }
 </style>

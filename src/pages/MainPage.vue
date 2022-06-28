@@ -2,13 +2,13 @@
   <div class="container">
     <h1 class="title">Main Page</h1>
     <div id="right">
-      <RecipePreviewList title="Random Recipes" class="RandomRecipes center" />
+      <RecipePreviewList title="Explore This Recipes" class="RandomRecipes center" />
     </div>
 
     <div id="left">
       <RecipePreviewList
         v-if="$root.store.username"
-        title="Last Viewed Recipes"
+        title="Last Watched Recipes"
         :class="{
           RandomRecipes: true,
           center: true,
@@ -27,7 +27,6 @@
 
 <script>
 import RecipePreviewList from "../components/RecipePreviewList";
-import Modal from "../components/Modal";
 import Welcome from "../components/Welcome.vue";
 export default {
   components: {

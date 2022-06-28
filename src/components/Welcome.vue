@@ -12,7 +12,7 @@
     </h4>
     <br />
     <b-button href="#" @click="onLogIn" variant="primary"> Login</b-button>
-    <b-button href="#" @click="onRegister" variant="primary"> Sign-Up</b-button>
+    <b-button href="#" @click="onRegister" variant="primary"> Register</b-button>
   </div>
 </template>
 
