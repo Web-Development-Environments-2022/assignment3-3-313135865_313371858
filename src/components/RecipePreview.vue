@@ -1,106 +1,128 @@
 <template>
-
   <div>
-      <div :class = "seen">
-    <router-link
-      v-if="!recipe.user_id"
-      :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
-      class="recipe-preview"
-      tag="li"
-    >
-      <b-card
-        :img-src="recipe.image"
-        img-width="250px"
-        img-alt="Card image"
-        img-left
-        class="mb-3"
+    <div :class="seen">
+      <router-link
+        v-if="!recipe.user_id"
+        :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
+        class="recipe-preview"
+        tag="li"
       >
-        <h5>
-          {{ recipe.title }}
-        </h5>
-        <b-card-text>
-          <b-badge>Duration: {{recipe.readyInMinutes}} </b-badge>
-          &nbsp;
-          <b-badge>Likes: {{ recipe.aggregateLikes }}  </b-badge>
-          &nbsp;
-          <b-badge v-if="recipe.glutenFree" variant="primary">Gluten Free</b-badge>
-          &nbsp;
-          <b-badge v-if="recipe.vegetarian" variant="success">Vegetarian</b-badge>
-          &nbsp;
-          <b-badge v-if="recipe.vegan" variant="info">Vegan</b-badge>
-          
-        </b-card-text>
-      </b-card>
+        <b-card
+          :img-src="recipe.image"
+          img-width="250px"
+          img-alt="Card image"
+          img-left
+          class="mb-3"
+        >
+          <h5>
+            {{ recipe.title }}
+          </h5>
+          <b-card-text>
+            <b-badge
+              v-if="this.favorite"
+              @click="removeFromFavorites"
+              variant="success"
+              >Favorite</b-badge
+            >
+            <b-badge
+              v-if="!this.favorite"
+              @click="addToFavorites"
+              variant="danger"
+              >Not Favorite</b-badge
+            >
+            &nbsp;
+            <b-badge>Duration: {{ recipe.readyInMinutes }} </b-badge>
+            &nbsp;
+            <b-badge>Likes: {{ recipe.aggregateLikes }} </b-badge>
+            &nbsp;
+            <b-badge v-if="recipe.glutenFree" variant="primary"
+              >Gluten Free</b-badge
+            >
+            &nbsp;
+            <b-badge v-if="recipe.vegetarian" variant="success"
+              >Vegetarian</b-badge
+            >
+            &nbsp;
+            <b-badge v-if="recipe.vegan" variant="info">Vegan</b-badge>
+          </b-card-text>
+        </b-card>
+      </router-link>
 
-    </router-link>
-
-      
-    <router-link
-      v-else-if="!recipe.recipe_owner"
-      :to="{ name: 'dbrecipes', params: { recipeId: recipe.id, recipeType: 'Personal'  } }"
-      class="recipe-preview"
-      tag="li"
-    >
-      <b-card
-        :img-src="recipe.image"
-        img-width="250px"
-        img-alt="Card image"
-        img-left
-        class="mb-3"
+      <router-link
+        v-else-if="!recipe.recipe_owner"
+        :to="{
+          name: 'dbrecipes',
+          params: { recipeId: recipe.id, recipeType: 'Personal' },
+        }"
+        class="recipe-preview"
+        tag="li"
       >
-        <h5>
-          {{ recipe.title }}
-        </h5>
-        <b-card-text>
-          <b-badge>Duration: {{recipe.readyInMinutes}} </b-badge>
-          &nbsp;
-          <b-badge>Likes: 0  </b-badge>
-          &nbsp;
-          <b-badge v-if="recipe.glutenFree" variant="primary">Gluten Free</b-badge>
-          &nbsp;
-          <b-badge v-if="recipe.vegetarian" variant="success">Vegetarian</b-badge>
-          &nbsp;
-          <b-badge v-if="recipe.vegan" variant="info">Vegan</b-badge>
-          
-        </b-card-text>
-      </b-card>
-    </router-link>
+        <b-card
+          :img-src="recipe.image"
+          img-width="250px"
+          img-alt="Card image"
+          img-left
+          class="mb-3"
+        >
+          <h5>
+            {{ recipe.title }}
+          </h5>
+          <b-card-text>
+            <b-badge>Duration: {{ recipe.readyInMinutes }} </b-badge>
+            &nbsp;
+            <b-badge>Likes: 0 </b-badge>
+            &nbsp;
+            <b-badge v-if="recipe.glutenFree" variant="primary"
+              >Gluten Free</b-badge
+            >
+            &nbsp;
+            <b-badge v-if="recipe.vegetarian" variant="success"
+              >Vegetarian</b-badge
+            >
+            &nbsp;
+            <b-badge v-if="recipe.vegan" variant="info">Vegan</b-badge>
+          </b-card-text>
+        </b-card>
+      </router-link>
 
-
-     
-    <router-link
-     v-else
-      :to="{ name: 'dbrecipes', params: { recipeId: recipe.id,recipeType: 'Family' } }"
-      class="recipe-preview"
-      tag="li"
-    >
-      <b-card
-        :img-src="recipe.image"
-        img-width="250px"
-        img-alt="Card image"
-        img-left
-        class="mb-3"
+      <router-link
+        v-else
+        :to="{
+          name: 'dbrecipes',
+          params: { recipeId: recipe.id, recipeType: 'Family' },
+        }"
+        class="recipe-preview"
+        tag="li"
       >
-        <h5>
-          {{ recipe.title }}
-        </h5>
-        <b-card-text>
-          <b-badge>Duration: {{recipe.readyInMinutes}} </b-badge>
-          &nbsp;
-          <b-badge>Likes: {{ recipe.aggregateLikes }}  </b-badge>
-          &nbsp;
-          <b-badge v-if="recipe.glutenFree" variant="primary">Gluten Free</b-badge>
-          &nbsp;
-          <b-badge v-if="recipe.vegetarian" variant="success">Vegetarian</b-badge>
-          &nbsp;
-          <b-badge v-if="recipe.vegan" variant="info">Vegan</b-badge>
-          
-        </b-card-text>
-      </b-card>
-    </router-link>
+        <b-card
+          :img-src="recipe.image"
+          img-width="250px"
+          img-alt="Card image"
+          img-left
+          class="mb-3"
+        >
+          <h5>
+            {{ recipe.title }}
+          </h5>
+          <b-card-text>
+            <b-badge>Duration: {{ recipe.readyInMinutes }} </b-badge>
+            &nbsp;
+            <b-badge>Likes: {{ recipe.aggregateLikes }} </b-badge>
+            &nbsp;
+            <b-badge v-if="recipe.glutenFree" variant="primary"
+              >Gluten Free</b-badge
+            >
+            &nbsp;
+            <b-badge v-if="recipe.vegetarian" variant="success"
+              >Vegetarian</b-badge
+            >
+            &nbsp;
+            <b-badge v-if="recipe.vegan" variant="info">Vegan</b-badge>
+          </b-card-text>
+        </b-card>
+      </router-link>
     </div>
-</div>
-
+  </div>
 </template>
 
 <script>
@@ -113,25 +135,92 @@ export default {
     this.axios.get(this.recipe.image).then((i) => {
       this.image_load = true;
     });
+
     let response;
-    console.log(this.$root.store.server_domain + "/users/getHasSeen?recipeId="+this.recipe.id);
-    response = await this.axios.get(this.$root.store.server_domain + "/users/getHasSeen?recipeId="+this.recipe.id, {
-      withCredentials: true,
-    });
-    if (response.data == true){
-      this.seen = "seen"
+    console.log(
+      this.$root.store.server_domain +
+        "/users/getHasSeen?recipeId=" +
+        this.recipe.id
+    );
+    response = await this.axios.get(
+      this.$root.store.server_domain +
+        "/users/getHasSeen?recipeId=" +
+        this.recipe.id,
+      {
+        withCredentials: true,
+      }
+    );
+    if (response.data == true) {
+      this.seen = "seen";
+    }
+
+    if (!recipe.user_id) { //When the recipe type is API based and not persnoal 
+      let responseFavorites;
+      console.log(
+        this.$root.store.server_domain +
+          "/users/existInFavorites?recipeId=" +
+          this.recipe.id
+      );
+      responseFavorites = await this.axios.get(
+        this.$root.store.server_domain +
+          "/users/existInFavorites?recipeId=" +
+          this.recipe.id,
+        {
+          withCredentials: true,
+        }
+      );
+
+      if (responseFavorites.data == true) {
+        this.favorite = true;
+      }
     }
   },
   data() {
     return {
       image_load: false,
-      seen: "no_seen"
+      seen: "no_seen",
+      favorite: false,
     };
   },
   props: {
     recipe: {
-      type: Object,       
+      type: Object,
       required: true,
+    },
+  },
+  methods: {
+    async addToFavorites() {
+      event.stopPropagation();
+      let response;
+      const recipe = { recipeId: this.recipe.id };
+      console.log(recipe);
+      console.log(this.$root.store.server_domain + "/users/favorites");
+      response = await this.axios.post(
+        this.$root.store.server_domain + "/users/favorites",
+        recipe,
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(response);
+      this.favorite = true;
+    },
+    async removeFromFavorites() {
+      event.stopPropagation();
+      let response;
+      const recipe = { recipeId: this.recipe.id };
+      console.log(
+        this.$root.store.server_domain + "/users/removeFromFavorites"
+      );
+      response = await this.axios.post(
+        this.$root.store.server_domain + "/users/removeFromFavorites",
+        recipe,
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(response);
+      this.favorite = false;
     },
   },
 };
@@ -151,13 +240,16 @@ export default {
   position: relative;
 }
 
-.seen{ 
-   filter: brightness(90%) ; 
- }
+.seen {
+  filter: brightness(90%);
+}
 
- .no_seen{
+.no_seen {
+}
 
- }
+.mb-3:hover {
+  filter: brightness(95%);
+}
 
 .recipe-preview .recipe-body .recipe-image {
   margin-left: auto;
@@ -227,5 +319,4 @@ export default {
   width: 300px;
   padding: 1.25rem;
 }
-
 </style>

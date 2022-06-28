@@ -10,14 +10,15 @@
           <div class="wrapped">
             <div class="mb-3">
               <div>Ready in {{ recipe.readyInMinutes }} minutes</div>
-              <div>Likes: {{ recipe.aggregateLikes }} likes</div>
+              <div>Likes: {{ recipe.popularity }} </div>
             </div>
             Ingredients:
-            {{ recipe.instructions }}
+            {{ recipe.extendedIngredients }}
             <ul></ul>
           </div>
           <div class="wrapped">
             Instructions:
+            {{ recipe.instructions }}
           </div>
         </div>
       </div>
