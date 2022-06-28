@@ -154,25 +154,23 @@ export default {
       this.seen = "seen";
     }
 
-    if (!recipe.user_id) { //When the recipe type is API based and not persnoal 
-      let responseFavorites;
-      console.log(
-        this.$root.store.server_domain +
-          "/users/existInFavorites?recipeId=" +
-          this.recipe.id
-      );
-      responseFavorites = await this.axios.get(
-        this.$root.store.server_domain +
-          "/users/existInFavorites?recipeId=" +
-          this.recipe.id,
-        {
-          withCredentials: true,
-        }
-      );
-
-      if (responseFavorites.data == true) {
-        this.favorite = true;
+    let responseFavorites;
+    console.log(
+      this.$root.store.server_domain +
+        "/users/existInFavorites?recipeId=" +
+        this.recipe.id
+    );
+    responseFavorites = await this.axios.get(
+      this.$root.store.server_domain +
+        "/users/existInFavorites?recipeId=" +
+        this.recipe.id,
+      {
+        withCredentials: true,
       }
+    );
+
+    if (responseFavorites.data == true) {
+      this.favorite = true;
     }
   },
   data() {

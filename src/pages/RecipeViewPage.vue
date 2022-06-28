@@ -5,16 +5,16 @@
         <h1>{{ recipe.title }}</h1>
 
         <div v-if="$root.store.username">
-        <div v-if="!this.favorite">
-          <b-button href="#" @click="addToFavorites()" variant="primary">
-            Add to favorites</b-button
-          >
-        </div>
-        <div v-else>
-          <b-button href="#" @click="removeFromFavorites()" variant="sub">
-            Remove from favorites</b-button
-          >
-        </div>
+          <div v-if="!this.favorite">
+            <b-button href="#" @click="addToFavorites()" variant="primary">
+              Add to favorites</b-button
+            >
+          </div>
+          <div v-else>
+            <b-button href="#" @click="removeFromFavorites()" variant="sub">
+              Remove from favorites</b-button
+            >
+          </div>
         </div>
         <img :src="recipe.image" class="center" />
       </div>
@@ -24,7 +24,18 @@
             <div class="mb-3">
               <div>Ready in {{ recipe.readyInMinutes }} minutes</div>
               <div>Likes: {{ recipe.aggregateLikes }} likes</div>
+              <div>Servings: {{ recipe.servings }}</div>
+              <b-badge v-if="recipe.glutenFree" variant="primary"
+                >Gluten Free</b-badge
+              >
+              &nbsp;
+              <b-badge v-if="recipe.vegetarian" variant="success"
+                >Vegetarian</b-badge
+              >
+              &nbsp;
+              <b-badge v-if="recipe.vegan" variant="info">Vegan</b-badge>
             </div>
+
             Ingredients:
             <ul>
               <li
@@ -66,26 +77,18 @@ export default {
   async created() {
     try {
       let response;
-      // response = this.$route.params.response;
-
       try {
         console.log(
-         this.$root.store.server_domain + "/recipes/recipeFullDetails?recipeId=" +
+          this.$root.store.server_domain +
+            "/recipes/recipeFullDetails?recipeId=" +
             this.$route.params.recipeId
         );
         response = await this.axios.get(
-          this.$root.store.server_domain + "/recipes/recipeFullDetails?recipeId=" +
+          this.$root.store.server_domain +
+            "/recipes/recipeFullDetails?recipeId=" +
             this.$route.params.recipeId,
           { withCredentials: true }
         );
-        // "https://test-for-3-2.herokuapp.com/recipes/info",
-
-        // this.$root.store.server_domain + "/recipes/info",
-        // {
-        //   params: { id: this.$route.params.recipeId }
-        // }
-
-        // console.log("response.status", response.status);
 
         if (response.status !== 200) this.$router.replace("/NotFound");
       } catch (error) {
@@ -102,6 +105,10 @@ export default {
         readyInMinutes,
         image,
         title,
+        servings,
+        vegan,
+        vegetarian,
+        glutenFree,
       } = response.data;
 
       let _instructions = analyzedInstructions
@@ -120,6 +127,10 @@ export default {
         readyInMinutes,
         image,
         title,
+        servings,
+        vegan,
+        vegetarian,
+        glutenFree,
       };
 
       this.recipe = _recipe;
@@ -135,8 +146,7 @@ export default {
       console.log(recipe);
       console.log(this.$root.store.server_domain + "/users/favorites");
       response = await this.axios.post(
-        this.$root.store.server_domain 
-        + "/users/favorites",
+        this.$root.store.server_domain + "/users/favorites",
         recipe,
         {
           withCredentials: true,
@@ -149,11 +159,13 @@ export default {
       let response;
       const recipe = { recipeId: this.$route.params.recipeId };
       console.log(
-        this.$root.store.server_domain + "/users/existInFavorites?recipeId=" +
+        this.$root.store.server_domain +
+          "/users/existInFavorites?recipeId=" +
           this.$route.params.recipeId
       );
       response = await this.axios.get(
-        this.$root.store.server_domain + "/users/existInFavorites?recipeId=" +
+        this.$root.store.server_domain +
+          "/users/existInFavorites?recipeId=" +
           this.$route.params.recipeId,
         {
           withCredentials: true,
@@ -168,9 +180,11 @@ export default {
     async removeFromFavorites() {
       let response;
       const recipe = { recipeId: this.$route.params.recipeId };
-      console.log(this.$root.store.server_domain + "/users/removeFromFavorites");
+      console.log(
+        this.$root.store.server_domain + "/users/removeFromFavorites"
+      );
       response = await this.axios.post(
-       this.$root.store.server_domain + "/users/removeFromFavorites",
+        this.$root.store.server_domain + "/users/removeFromFavorites",
         recipe,
         {
           withCredentials: true,

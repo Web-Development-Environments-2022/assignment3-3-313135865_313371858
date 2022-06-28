@@ -10,7 +10,17 @@
           <div class="wrapped">
             <div class="mb-3">
               <div>Ready in {{ recipe.readyInMinutes }} minutes</div>
-              <div>Likes: {{ recipe.popularity }} </div>
+              <div>Likes: {{ recipe.popularity }}</div>
+              <div>Servings: {{ recipe.servings }}</div>
+              <b-badge v-if="recipe.glutenFree == 1" variant="primary"
+                >Gluten Free</b-badge
+              >
+              &nbsp;
+              <b-badge v-if="recipe.vegetarian == 1" variant="success"
+                >Vegetarian</b-badge
+              >
+              &nbsp;
+              <b-badge v-if="recipe.vegan == 1" variant="info">Vegan</b-badge>
             </div>
             Ingredients:
             {{ recipe.extendedIngredients }}
