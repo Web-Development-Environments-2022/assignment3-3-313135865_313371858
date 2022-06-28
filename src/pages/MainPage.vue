@@ -27,6 +27,7 @@
 
 <script>
 import RecipePreviewList from "../components/RecipePreviewList";
+import Modal from "../components/Modal";
 import Welcome from "../components/Welcome.vue";
 export default {
   components: {

@@ -14,7 +14,6 @@
       the bulk of the required functionality and in the next step to add design.</li>
     <li>Functionality of wind movement. </li>
     <li>Failure to eat a score for some of the characters. </li>
-
   </div>
  
 </template>
